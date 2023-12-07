@@ -1,6 +1,12 @@
 from PyQt5 import QtWidgets, uic, QtGui
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget, QSlider, QComboBox, QGraphicsRectItem
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
+from PyQt5.QtCore import Qt, QRectF
 import sys
+import logging
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -8,36 +14,10 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
         uic.loadUi('mainwindow.ui', self)
         self.init_connectors()
-        self.currentfile = "ashf2.jfif"
-        pixmap = QtGui.QPixmap("ashf2.jfif")
-        pixmap = pixmap.scaled(self.width(), self.height(), aspectRatioMode=Qt.KeepAspectRatio)
-        self.originalImage.setPixmap(pixmap)
-        self.originalImage.setMinimumSize(1, 1)
-        self.phaseImage.setPixmap(pixmap)
-        self.phaseImage.setMinimumSize(1, 1)
-        self.magnitudeImage.setPixmap(pixmap)
-        self.magnitudeImage.setMinimumSize(1, 1)
-        self.greyScaledImage.setPixmap(pixmap)
-        self.greyScaledImage.setMinimumSize(1, 1)
 
 
-
-
-
-    def changeContrast(self):
-       print(self.contrastSlider.value())
-
-    # def resizeEvent(self, event):
-    #     try:
-    #         pixmap = QtGui.QPixmap(self.currentfile)
-    #     except:
-    #         pixmap = QtGui.QPixmap("ashf2.jfif")
-    #     pixmap =pixmap.scaled(self.width(), self.height(), aspectRatioMode=Qt.KeepAspectRatio)
-    #     self.label.setPixmap(pixmap)
-    #     self.label.resize(self.width(), self.height())
-    
     def init_connectors(self):
-       self.contrastSlider.sliderReleased.connect(self.changeContrast)
+        pass
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
