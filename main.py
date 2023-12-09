@@ -88,8 +88,17 @@ class MainWindow(QtWidgets.QMainWindow):
             self.loadFile(idx)
             self.enableOutputCombos(idx)
     def enableOutputCombos(self,index):
-        self.allComboBoxes[index].setEnabled(True)        
-            
+        self.allComboBoxes[index].setEnabled(True)            
+    def applyFtComponents(self,idx):
+        selectedComponent = self.allComboBoxes[idx].currentIndex()
+        fShift = np.fft.fftshift(self.imagesModels[idx].dft)
+        magnitude = 20 * np.log(np.abs(fShift))
+        phase = np.angle(fShift)
+        real = 20 * np.log(np.real(fShift))
+        imaginary = np.imag(fShift)
+        FtComponentsData = [magnitude,phase,real,imaginary]
+        self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx])
+
 
 def init_connectors(self):
     self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
@@ -101,6 +110,10 @@ def init_connectors(self):
         self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
         self.contrastSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
         self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
+    self.ftComponentMenu1.activated.connect(lambda: self.applyFtComponents(0))
+    self.ftComponentMenu2.activated.connect(lambda: self.applyFtComponents(1))
+    self.ftComponentMenu3.activated.connect(lambda: self.applyFtComponents(2))
+    self.ftComponentMenu4.activated.connect(lambda: self.applyFtComponents(3))
 
 
 def main():
