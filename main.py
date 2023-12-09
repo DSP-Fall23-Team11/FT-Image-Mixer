@@ -6,9 +6,12 @@ import sys
 import logging
 import numpy as np
 import cv2
+import time
 import matplotlib.pyplot as plt
 from ImageModel import ImageModel
 
+#Local 
+from storage import Storage
 
 # Create and configure logger
 logging.basicConfig(level=logging.DEBUG,
@@ -33,45 +36,30 @@ class MainWindow(QtWidgets.QMainWindow):
                              self.outputImage1, self.outputImage2]
         self.heights = [..., ... , ... , ...]
         self.weights = [..., ... , ... , ...]
+        self.myStorage = Storage(self.imagesModels)
+        self.allComboBoxes=[self.ftComponentMenu1,self.ftComponentMenu2,self.ftComponentMenu3,self.ftComponentMenu4]
         self.setupImagesView()
 
     def loadFile(self, imgID):
-            """
-            Load the File from User
-            :param imgID: 0 or 1
-            :return:
-            """
-            # Open File & Check if it was loaded correctly
-            logger.info("Browsing the files...")
-            repo_path = "D:\Study\Courses\Python\DSP Tasks - 3rd Year\sbe309-2020-task3-Abdullah-Alrefaey\images"
-            self.filename, self.format = QtWidgets.QFileDialog.getOpenFileName(None, "Load Image", repo_path,
+            self.filename, self.format = QtWidgets.QFileDialog.getOpenFileName(None, "Load Image",
                                                                             "*.jpg;;" "*.jpeg;;" "*.png;;")
-            imgName = self.filename.split('/')[-1]
+            imgName = self.filename.split('/')[-1] # for Logging
             if self.filename == "":
-                pass
-            else:
-                image = cv2.imread(self.filename, flags=cv2.IMREAD_GRAYSCALE).T
-                self.heights[imgID], self.weights[imgID] = image.shape
-                self.imagesModels[imgID] = ImageModel(self.filename)
+                return 
+            image = cv2.imread(self.filename, flags=cv2.IMREAD_GRAYSCALE).T
+            self.imagesModels[imgID] = ImageModel(self.filename)
+           # self.heights[imgID], self.weights[imgID] = image.shape
+            # self.myStorage = Storage(self.imagesModels)
+            self.myStorage.setImageModels(self.imagesModels)
+            self.myStorage.unifyImagesSize()
+            self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
+            for i, img in enumerate(self.imagesModels):
+                 if type(img)!=type(...):
+                      print("ana "+str(i+1),img.imgShape)
+                      self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
+                    #   cv2.imwrite("output_image"+str(i+1)+".jpg", img.imgByte)
+                      self.inputImages[i].export("mama"+str(i)+".jpg")
 
-                if type(self.imagesModels[~imgID]) == type(...):
-                    # Create and Display Original Image
-                    self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
-                   # self.updateCombos[imgID].setEnabled(True)
-                   # logger.info(f"Added Image{imgID + 1}: {imgName} successfully")
-                else:
-                    if self.heights[1] != self.heights[0] or self.weights[1] != self.weights[0]:
-                        self.showMessage("Warning!!", "Image sizes must be the same, please upload another image",
-                                        QMessageBox.Ok, QMessageBox.Warning)
-                      #  logger.warning("Warning!!. Image sizes must be the same, please upload another image")
-                    else:
-                        self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
-                     #   self.updateCombos[imgID].setEnabled(True)
-                     #   logger.info(f"Added Image{imgID + 1}: {imgName} successfully")
-
-              #  if self.updateCombos[0].isEnabled() and self.updateCombos[1].isEnabled():
-                  #  self.enableOutputCombos()
-                  #  logger.info("ComboBoxes have been enabled successfully")
     def setupImagesView(self):
         for widget in self.imageWidgets:
             widget.ui.histogram.hide()
@@ -83,12 +71,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def displayImage(self, data, widget):
                 widget.setImage(data)
-                widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
-                                    padding=0)
+                #widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
+                #                    padding=0)
                 widget.ui.roiPlot.hide()            
     def on_mouse_click(self,idx):
             print("Double-clicked!"+str(idx))
             self.loadFile(idx)
+            self.enableOutputCombos(idx)
+    def enableOutputCombos(self,index):
+        self.allComboBoxes[index].setEnabled(True)        
             
 
 def init_connectors(self):

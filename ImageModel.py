@@ -6,6 +6,7 @@ class ImageModel():
         self.imgPath = imgPath
         self.imgByte = cv2.imread(self.imgPath, flags=cv2.IMREAD_GRAYSCALE).T
         self.imgShape = self.imgByte.shape
+        print("hh",self.imgShape)
         self.dft = np.fft.fft2(self.imgByte)
         self.real = np.real(self.dft)
         self.imaginary = np.imag(self.dft)
@@ -13,3 +14,15 @@ class ImageModel():
         self.phase = np.angle(self.dft)
         self.uniformMagnitude = np.ones(self.imgByte.shape)
         self.uniformPhase = np.zeros(self.imgByte.shape)
+    
+    def updateImgDims(self,imgByte):
+      self.imgByte = imgByte
+      self.imgShape = self.imgByte.shape
+      self.dft = np.fft.fft2(self.imgByte)
+      self.real = np.real(self.dft)
+      self.imaginary = np.imag(self.dft)
+      self.magnitude = np.abs(self.dft)
+      self.phase = np.angle(self.dft)
+      self.uniformMagnitude = np.ones(self.imgByte.shape)
+      self.uniformPhase = np.zeros(self.imgByte.shape)
+

@@ -17,8 +17,8 @@
    <widget class="ImageView" name="outputImage1">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>550</y>
+      <x>20</x>
+      <y>640</y>
       <width>521</width>
       <height>266</height>
      </rect>
@@ -1085,8 +1085,8 @@
    <widget class="QLabel" name="label_22">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>520</y>
+      <x>20</x>
+      <y>610</y>
       <width>55</width>
       <height>16</height>
      </rect>
@@ -1098,8 +1098,8 @@
    <widget class="QLabel" name="label_23">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>530</y>
+      <x>560</x>
+      <y>620</y>
       <width>55</width>
       <height>16</height>
      </rect>
@@ -1108,13 +1108,13 @@
      <string>Output2</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>521</width>
-      <height>471</height>
+      <width>551</width>
+      <height>531</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -1123,6 +1123,26 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>FT Magnitude</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Phase</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Real Components</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Imaginary Components</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="4" column="0">
@@ -1237,6 +1257,26 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>FT Magnitude</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Phase</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Real Components</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Imaginary Components</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="6" column="1">
@@ -1312,13 +1352,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>570</x>
       <y>40</y>
-      <width>511</width>
-      <height>471</height>
+      <width>531</width>
+      <height>531</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
@@ -1370,6 +1410,26 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>FT Magnitude</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Phase</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Real Components</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Imaginary Components</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="5" column="1">
@@ -1377,6 +1437,26 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>FT Magnitude</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Phase</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Real Components</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Imaginary Components</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="6" column="0">
@@ -1519,8 +1599,8 @@
    <widget class="ImageView" name="outputImage2">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>550</y>
+      <x>560</x>
+      <y>640</y>
       <width>521</width>
       <height>266</height>
      </rect>
