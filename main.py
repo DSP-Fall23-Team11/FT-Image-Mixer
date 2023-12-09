@@ -26,7 +26,6 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi('mainwindow.ui', self)
-        init_connectors(self)
         self.inputImages = [self.originalImage1, self.originalImage2,self.originalImage3,self.originalImage4]
         self.ftComponentImages = [self.ftComponent1, self.ftComponent2,self.ftComponent3,self.ftComponent4]
         self.outputImages = [self.outputImage1, self.outputImage2]
@@ -38,6 +37,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.weights = [..., ... , ... , ...]
         self.myStorage = Storage(self.imagesModels)
         self.allComboBoxes=[self.ftComponentMenu1,self.ftComponentMenu2,self.ftComponentMenu3,self.ftComponentMenu4]
+        self.brightnessSliders=[self.brightnessSlider1,self.brightnessSlider2,self.brightnessSlider3,self.brightnessSlider4]
+        self.contrastSliders=[self.contrastSlider1,self.contrastSlider2,self.contrastSlider3,self.contrastSlider4]
+        for i in range(4):
+            self.contrastSliders[i].setMaximum(150)
+            self.contrastSliders[i].setMinimum(10)
+            self.contrastSliders[i].setValue(100)
+            self.brightnessSliders[i].setMaximum(75)
+            self.brightnessSliders[i].setMinimum(-75)
+            self.brightnessSliders[i].setValue(0)
+        init_connectors(self)
         self.setupImagesView()
 
     def loadFile(self, imgID):
@@ -87,6 +96,11 @@ def init_connectors(self):
     self.originalImage2.mouseDoubleClickEvent = lambda event, idx=1: self.on_mouse_click(idx)
     self.originalImage3.mouseDoubleClickEvent = lambda event, idx=2: self.on_mouse_click(idx)
     self.originalImage4.mouseDoubleClickEvent = lambda event, idx=3: self.on_mouse_click(idx)
+    for i in range(4):
+        self.brightnessSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
+        self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
+        self.contrastSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
+        self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
 
 
 def main():
