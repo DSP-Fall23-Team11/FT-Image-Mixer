@@ -23,7 +23,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi('mainwindow.ui', self)
-        init_connectors(self)
+        
         self.inputImages = [self.originalImage1, self.originalImage2,self.originalImage3,self.originalImage4]
         self.ftComponentImages = [self.ftComponent1, self.ftComponent2,self.ftComponent3,self.ftComponent4]
         self.outputImages = [self.outputImage1, self.outputImage2]
@@ -34,6 +34,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.heights = [..., ... , ... , ...]
         self.weights = [..., ... , ... , ...]
         self.setupImagesView()
+        self.allComboBoxes=[self.ftComponentMenu1,self.ftComponentMenu2,self.ftComponentMenu3,self.ftComponentMenu4]
+        self.brightnessSliders=[self.brightnessSlider1,self.brightnessSlider2,self.brightnessSlider3,self.brightnessSlider4]
+        self.contrastSliders=[self.contrastSlider1,self.contrastSlider2,self.contrastSlider3,self.contrastSlider4]
+        for i in range(4):
+            self.contrastSliders[i].setMaximum(150)
+            self.contrastSliders[i].setMinimum(10)
+            self.contrastSliders[i].setValue(100)
+            self.brightnessSliders[i].setMaximum(75)
+            self.brightnessSliders[i].setMinimum(-75)
+            self.brightnessSliders[i].setValue(0)
+        init_connectors(self)
 
     def loadFile(self, imgID):
             """
@@ -69,9 +80,9 @@ class MainWindow(QtWidgets.QMainWindow):
                      #   self.updateCombos[imgID].setEnabled(True)
                      #   logger.info(f"Added Image{imgID + 1}: {imgName} successfully")
 
-              #  if self.updateCombos[0].isEnabled() and self.updateCombos[1].isEnabled():
-                  #  self.enableOutputCombos()
-                  #  logger.info("ComboBoxes have been enabled successfully")
+                # if self.updateCombos[0].isEnabled() and self.updateCombos[1].isEnabled():
+                #    self.enableOutputCombos()
+                #    logger.info("ComboBoxes have been enabled successfully")
     def setupImagesView(self):
         for widget in self.imageWidgets:
             widget.ui.histogram.hide()
@@ -88,8 +99,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 widget.ui.roiPlot.hide()            
     def on_mouse_click(self,idx):
             print("Double-clicked!"+str(idx))
+            self.enableOutputCombos(idx)
             self.loadFile(idx)
-            
+
+    def enableOutputCombos(self,index):
+        self.allComboBoxes[index].setEnabled(True)
+         
+         
 
 def init_connectors(self):
     self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
@@ -97,7 +113,9 @@ def init_connectors(self):
     self.originalImage3.mouseDoubleClickEvent = lambda event, idx=2: self.on_mouse_click(idx)
     self.originalImage4.mouseDoubleClickEvent = lambda event, idx=3: self.on_mouse_click(idx)
 
-
+    for i in range(4):
+        self.brightnessSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
+        self.contrastSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
 def main():
     app = QtWidgets.QApplication(sys.argv)
     main_window = MainWindow()
