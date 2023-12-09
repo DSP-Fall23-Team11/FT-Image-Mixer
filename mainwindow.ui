@@ -1123,6 +1123,17 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="currentText">
+        <string>Choose FT Component</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Choose FT Component</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>FT Magnitude</string>
@@ -1257,6 +1268,11 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>Choose FT Component</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>FT Magnitude</string>
@@ -1412,6 +1428,11 @@
        </property>
        <item>
         <property name="text">
+         <string>Choose FT Component</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>FT Magnitude</string>
         </property>
        </item>
@@ -1437,6 +1458,11 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>Choose FT Component</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>FT Magnitude</string>
