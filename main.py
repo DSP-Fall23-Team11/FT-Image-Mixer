@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel, QVBoxLayout, QWidget, QSlider, QComboBox, QGraphicsRectItem
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
-from PyQt5.QtCore import Qt, QRectF
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel, QVBoxLayout, QWidget, QSlider, QComboBox, QGraphicsRectItem,QGraphicsView,QGraphicsScene
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor,QMouseEvent
+from PyQt5.QtCore import Qt, QRectF,pyqtSignal
 import sys
 import logging
 import numpy as np
@@ -49,7 +49,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.brightnessSliders[i].setMaximum(75)
             self.brightnessSliders[i].setMinimum(-75)
             self.brightnessSliders[i].setValue(0)
-        init_connectors(self)
+        self.x = None
+        self.y = None
+        self.contrastFactor=1
+        self.brightnessFactor=0
+        self.init_connectors()
         self.setupImagesView()
 
     def loadFile(self, imgID):
@@ -68,10 +72,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
-                      print("ana "+str(i+1),img.imgShape)
+                    #   print("ana "+str(i+1),img.imgShape)
                       self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
                     #   cv2.imwrite("output_image"+str(i+1)+".jpg", img.imgByte)
-                      self.inputImages[i].export("mama"+str(i)+".jpg")
+                    #   self.inputImages[i].export("mama"+str(i)+".jpg")
 
     def setupImagesView(self):
         for widget in self.imageWidgets:
@@ -80,15 +84,18 @@ class MainWindow(QtWidgets.QMainWindow):
             widget.ui.menuBtn.hide()
             widget.ui.roiPlot.hide()
             widget.getView().setAspectLocked(False)
-            widget.view.setAspectLocked(False)      
+            widget.view.setAspectLocked(False)  
+            
+        
 
     def displayImage(self, data, widget):
                 widget.setImage(data)
-                #widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
-                #                    padding=0)
-                widget.ui.roiPlot.hide()            
+                widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
+                                   padding=0)
+                widget.ui.roiPlot.hide()    
+                        
     def on_mouse_click(self,idx):
-            print("Double-clicked!"+str(idx))
+            # print("Double-clicked!"+str(idx))
             self.loadFile(idx)
             self.enableOutputCombos(idx)
             self.enableOutputOptions()
@@ -103,7 +110,8 @@ class MainWindow(QtWidgets.QMainWindow):
         imaginary = np.imag(fShift)
         FtComponentsData = [0*magnitude,magnitude,phase,real,imaginary]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
-       
+        
+
     def enableOutputOptions(self):
          if self.myStorage.numOfImages == 4:
                 for i in range(4):
@@ -111,20 +119,65 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.outputComponentMenus[i].setEnabled(True)
                     self.componentWeightSliders[i].setEnabled(True)
 
-def init_connectors(self):
-    self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
-    self.originalImage2.mouseDoubleClickEvent = lambda event, idx=1: self.on_mouse_click(idx)
-    self.originalImage3.mouseDoubleClickEvent = lambda event, idx=2: self.on_mouse_click(idx)
-    self.originalImage4.mouseDoubleClickEvent = lambda event, idx=3: self.on_mouse_click(idx)
-    for i in range(4):
-        self.brightnessSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
-        self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
-        self.contrastSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
-        self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
-    self.ftComponentMenu1.activated.connect(lambda: self.applyFtComponents(1))
-    self.ftComponentMenu2.activated.connect(lambda: self.applyFtComponents(2))
-    self.ftComponentMenu3.activated.connect(lambda: self.applyFtComponents(3))
-    self.ftComponentMenu4.activated.connect(lambda: self.applyFtComponents(4))
+    def mousePressEvent(self, event: QMouseEvent):
+        if (
+            event.button() == Qt.MouseButton.RightButton
+            and self.originalImage1.geometry().contains(event.pos())
+        ):  
+            self.originalImage1.setEnabled(False)
+            self.mouse_pressed = True
+            self.track_mouse_position(event)
+
+    def mouseMoveEvent(self, event: QMouseEvent):
+        if self.mouse_pressed:
+            self.track_mouse_position(event)
+
+    def track_mouse_position(self, event: QMouseEvent):
+        # Track mouse position when clicking and holding on label1
+        crrX, crrY = event.pos().x(), event.pos().y()
+        # print(f"Mouse Position: ({crrX}, {crrY})")
+        if self.x is None:
+            self.x = crrX
+            self.y = crrY
+        else:
+            if crrX - self.x > 1: #Right higher brightness 
+                print("Right")
+                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor+0.4,self.contrastFactor)
+            elif crrX - self.x < -1: #Left Lower brightness
+                print("Left")
+                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor-0.4,self.contrastFactor)
+            self.x = crrX
+            if crrY - self.y > 1:
+                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor,self.contrastFactor-0.4)
+                print("Down")
+            elif crrY - self.y < -1:
+                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor,self.contrastFactor+0.4)
+                print("Up")
+            self.y = crrY
+        # print(f"Mouse Position: ({self.x}, {self.y})")
+        
+    def mouseReleaseEvent(self, event: QMouseEvent):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.mouse_pressed = False
+    
+    def init_connectors(self):
+
+        self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
+        self.originalImage2.mouseDoubleClickEvent = lambda event, idx=1: self.on_mouse_click(idx)
+        self.originalImage3.mouseDoubleClickEvent = lambda event, idx=2: self.on_mouse_click(idx)
+        self.originalImage4.mouseDoubleClickEvent = lambda event, idx=3: self.on_mouse_click(idx)
+
+        # for i in range(4):
+        #     self.brightnessSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
+        #     self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
+        #     self.contrastSliders[i].sliderReleased.connect(lambda i=i: ImageModel.editedImage(self,self.imagesModels[i],\
+        #     self.inputImages[i],self.brightnessSliders[i].value()/100,self.contrastSliders[i].value()/100))
+        self.ftComponentMenu1.activated.connect(lambda: self.applyFtComponents(1))
+        self.ftComponentMenu2.activated.connect(lambda: self.applyFtComponents(2))
+        self.ftComponentMenu3.activated.connect(lambda: self.applyFtComponents(3))
+        self.ftComponentMenu4.activated.connect(lambda: self.applyFtComponents(4))
+        self.mixButton.clicked.connect(lambda: self.mixFTComponents())
+        
 
 
 def main():

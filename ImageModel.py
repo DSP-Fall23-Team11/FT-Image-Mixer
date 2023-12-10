@@ -36,7 +36,7 @@ class ImageModel():
         m = np.array(imageObject.imgByte) 
         im = (m/ 255.0 + brightnessFactor) * 255
         im = np.clip(im, 0, 255).astype(np.uint8)
-        im = (im/ 255 - 0.5) * 255 * contrastFactor 
+        im = (im/ 255 - 0.5) * 255 * contrastFactor + 128 
         im = np.clip(im, 0, 255).astype(np.uint8)
         imageObject.editedimgByte = im
         widget.setImage(imageObject.editedimgByte)
