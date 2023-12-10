@@ -7,6 +7,7 @@ class Storage():
         self.ImagesModels = ImageModels
         self.minWidth = 100000
         self.minHeight = 100000
+        self.numOfImages = 0
     def setImageModels(self,ImageModels):
        self.ImagesModels = ImageModels
     def getMinDims(self):

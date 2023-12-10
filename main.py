@@ -39,6 +39,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.allComboBoxes=[self.ftComponentMenu1,self.ftComponentMenu2,self.ftComponentMenu3,self.ftComponentMenu4]
         self.brightnessSliders=[self.brightnessSlider1,self.brightnessSlider2,self.brightnessSlider3,self.brightnessSlider4]
         self.contrastSliders=[self.contrastSlider1,self.contrastSlider2,self.contrastSlider3,self.contrastSlider4]
+        self.imageOutputMenus=[self.imageOutputMenu1,self.imageOutputMenu2,self.imageOutputMenu3,self.imageOutputMenu4]
+        self.outputComponentMenus=[self.outputComponentMenu1,self.outputComponentMenu2,self.outputComponentMenu3,self.outputComponentMenu4]
+        self.componentWeightSliders=[self.componentWeightSlider1,self.componentWeightSlider2,self.componentWeightSlider3,self.componentWeightSlider4]
         for i in range(4):
             self.contrastSliders[i].setMaximum(150)
             self.contrastSliders[i].setMinimum(10)
@@ -59,6 +62,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.imagesModels[imgID] = ImageModel(self.filename)
            # self.heights[imgID], self.weights[imgID] = image.shape
             # self.myStorage = Storage(self.imagesModels)
+            self.myStorage.numOfImages += 1
             self.myStorage.setImageModels(self.imagesModels)
             self.myStorage.unifyImagesSize()
             self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
@@ -87,6 +91,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print("Double-clicked!"+str(idx))
             self.loadFile(idx)
             self.enableOutputCombos(idx)
+            self.enableOutputOptions()
     def enableOutputCombos(self,index):
         self.allComboBoxes[index].setEnabled(True)            
     def applyFtComponents(self,idx):
@@ -98,7 +103,13 @@ class MainWindow(QtWidgets.QMainWindow):
         imaginary = np.imag(fShift)
         FtComponentsData = [0*magnitude,magnitude,phase,real,imaginary]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
-
+       
+    def enableOutputOptions(self):
+         if self.myStorage.numOfImages == 4:
+                for i in range(4):
+                    self.imageOutputMenus[i].setEnabled(True)
+                    self.outputComponentMenus[i].setEnabled(True)
+                    self.componentWeightSliders[i].setEnabled(True)
 
 def init_connectors(self):
     self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
