@@ -9,7 +9,8 @@ import cv2
 import time
 import matplotlib.pyplot as plt
 from ImageModel import ImageModel
-
+from ImageMixer import ImageMixer
+from Modes import Modes
 #Local 
 from storage import Storage
 
@@ -36,7 +37,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.heights = [..., ... , ... , ...]
         self.weights = [..., ... , ... , ...]
         self.myStorage = Storage(self.imagesModels)
+        self.myMixer   = ImageMixer()
         self.allComboBoxes=[self.ftComponentMenu1,self.ftComponentMenu2,self.ftComponentMenu3,self.ftComponentMenu4]
+        self.outputComboBoxes = [self.outputComponentMenu1,self.outputComponentMenu2,self.outputComponentMenu3,self.outputComponentMenu4 ]
+        self.outputRatioSliders = [self.componentWeightSlider1,self.componentWeightSlider2,self.componentWeightSlider3,self.componentWeightSlider4]
         self.brightnessSliders=[self.brightnessSlider1,self.brightnessSlider2,self.brightnessSlider3,self.brightnessSlider4]
         self.contrastSliders=[self.contrastSlider1,self.contrastSlider2,self.contrastSlider3,self.contrastSlider4]
         for i in range(4):
@@ -64,7 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
-                      print("ana "+str(i+1),img.imgShape)
+                    #  print("ana "+str(i+1),img.imgShape)
                       self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
                     #   cv2.imwrite("output_image"+str(i+1)+".jpg", img.imgByte)
                       self.inputImages[i].export("mama"+str(i)+".jpg")
@@ -84,11 +88,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 #                    padding=0)
                 widget.ui.roiPlot.hide()            
     def on_mouse_click(self,idx):
-            print("Double-clicked!"+str(idx))
+           # print("Double-clicked!"+str(idx))
             self.loadFile(idx)
             self.enableOutputCombos(idx)
     def enableOutputCombos(self,index):
-        self.allComboBoxes[index].setEnabled(True)            
+        self.allComboBoxes[index].setEnabled(True)
+        self.outputComboBoxes[index].setEnabled(True)
+        self.outputRatioSliders[index].setEnabled(True)            
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
         fShift = np.fft.fftshift(self.imagesModels[idx-1].dft)
@@ -98,7 +104,28 @@ class MainWindow(QtWidgets.QMainWindow):
         imaginary = np.imag(fShift)
         FtComponentsData = [0*magnitude,magnitude,phase,real,imaginary]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
+    def handleOutputCombosChange(self):
+         pass
+    def handleOutputCombos(self):
+       print("mama")
+       output  = ...
+       outputIdx = self.outputChannelMenu.currentIndex()
+      # currentMode = self.outputComboBoxes[0].currentText()
+       selectedOutputComponents = [  i.currentText() for i in self.outputComboBoxes] 
+       weights = [i.value() for  i in self.outputRatioSliders]
+       self.myMixer.setWeights(weights)
+       if selectedOutputComponents[0] == "Magnitude" or selectedOutputComponents[0] == "Phase":
+            output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase)
+       elif selectedOutputComponents[0] == "Real"  or selectedOutputComponents[0] == "Imaginary":
+            output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary)
+       self.displayImage(output,self.outputImages[outputIdx])     
+        # Mixer Logic IFFT    
 
+                
+            
+
+             
+    
 
 def init_connectors(self):
     self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
@@ -114,6 +141,10 @@ def init_connectors(self):
     self.ftComponentMenu2.activated.connect(lambda: self.applyFtComponents(2))
     self.ftComponentMenu3.activated.connect(lambda: self.applyFtComponents(3))
     self.ftComponentMenu4.activated.connect(lambda: self.applyFtComponents(4))
+    self.outputComponentMenu1.activated.connect(self.handleOutputCombos)
+    self.outputComponentMenu2.activated.connect(self.handleOutputCombos)
+    self.outputComponentMenu3.activated.connect(self.handleOutputCombos)
+    self.outputComponentMenu4.activated.connect(self.handleOutputCombos)
 
 
 def main():

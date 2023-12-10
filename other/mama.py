@@ -1,126 +1,88 @@
-import logging
-import numpy as np
-import cv2
-import matplotlib.pyplot as plt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene, QGraphicsPixmapItem, QSlider, QVBoxLayout, QWidget
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtCore import Qt
+import sys
+from PyQt5.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget 
+from PyQt5.QtGui import QPixmap, QMouseEvent , QImage
+from PyQt5 import QtCore
 
-
-class ImageProcessor:
-    def __init__(self, image_path):
-        self.image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-
-    def convert_to_grayscale(self):
-        # Convert the image to grayscale if it's colored
-        if len(self.image.shape) == 3:
-            self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
-
-    def resize(self, target_size):
-        # Resize the image to the target size
-        self.image = cv2.resize(self.image, target_size)
-
-    def apply_fourier_transform(self):
-        # Apply Fourier Transform to the image
-        f_transform = np.fft.fft2(self.image)
-        return f_transform
-
-
-class ImageDisplay(QGraphicsView):
+class ImageDisplayApp(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.scene = QGraphicsScene(self)
-        self.pixmap_item = QGraphicsPixmapItem()
-        self.scene.addItem(self.pixmap_item)
-        self.setScene(self.scene)
+        # Create labels and set image paths
+        self.x = None
+        self.y = None
+        image_path1 = "./assets/images/sad_cat.jpg"
+        image_path2 = "./assets/images/sad_cat.jpg"
+        self.label1 = QLabel(self)
+        label2 = QLabel(self)
 
-        self.image_processor = None
-        self.component_combo = None
-        self.brightness_slider = QSlider(Qt.Horizontal)
-        self.contrast_slider = QSlider(Qt.Horizontal)
+        # Set images to labels
+        self.set_image(self.label1, image_path1)
+        self.set_image(label2, image_path2)
 
-        self.init_ui()
+        # Set red background color for labels
+        self.label1.setStyleSheet("background-color: red;")
+        label2.setStyleSheet("background-color: red;")
 
-    def init_ui(self):
-        self.brightness_slider.setRange(-255, 255)
-        self.contrast_slider.setRange(-127, 127)
+        # Create a vertical layout
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.label1)
+        layout.addWidget(label2)
+        layout.setAlignment(self.label1, QtCore.Qt.AlignmentFlag.AlignCenter)
+        layout.setAlignment(label2, QtCore.Qt.AlignmentFlag.AlignCenter)
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.component_combo)
-        layout.addWidget(self.brightness_slider)
-        layout.addWidget(self.contrast_slider)
+        # Set the layout for the main window
         self.setLayout(layout)
 
-        self.brightness_slider.valueChanged.connect(self.update_display)
-        self.contrast_slider.valueChanged.connect(self.update_display)
+        # Set window properties
+        self.setWindowTitle("Image Display App")
+        self.setGeometry(100, 100, 800, 600)
 
-    def set_image_processor(self, image_processor):
-        self.image_processor = image_processor
-        self.update_display()
+        # Variable to track mouse movement
+        self.mouse_pressed = False
 
-    def update_display(self):
-        if self.image_processor:
-            component = self.get_current_component()
-            image_data = self.get_image_data(component)
-            adjusted_image = self.adjust_brightness_contrast(image_data)
-            pixmap = self.create_pixmap(adjusted_image)
-            self.pixmap_item.setPixmap(pixmap)
+    def set_image(self, label, image_path):
+        pixmap = QPixmap(image_path)
+        label.setPixmap(pixmap)
+        label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
-    def get_current_component(self):
-        return self.component_combo.currentText()
+    def mousePressEvent(self, event: QMouseEvent):
+        if (
+            event.button() == QtCore.Qt.MouseButton.LeftButton
+            and self.label1.geometry().contains(event.pos())
+        ):
+            self.mouse_pressed = True
+            self.track_mouse_position(event)
 
-    def get_image_data(self, component):
-        if component == "FT Magnitude":
-            return np.abs(self.image_processor.apply_fourier_transform())
-        elif component == "FT Phase":
-            return np.angle(self.image_processor.apply_fourier_transform())
-        elif component == "FT Real":
-            return np.real(self.image_processor.apply_fourier_transform())
-        elif component == "FT Imaginary":
-            return np.imag(self.image_processor.apply_fourier_transform())
+    def mouseMoveEvent(self, event: QMouseEvent):
+        if self.mouse_pressed:
+            self.track_mouse_position(event)
 
-    def create_pixmap(self, image_data):
-        image_data = np.log(1 + np.abs(image_data))
-        image_data = (image_data / np.max(image_data) * 255).astype(np.uint8)
-        height, width = image_data.shape
-        q_image = QImage(image_data.data, width, height, width, QImage.Format_Grayscale8)
-        return QPixmap.fromImage(q_image)
+    def track_mouse_position(self, event: QMouseEvent):
+        # Track mouse position when clicking and holding on label1
+        crrX, crrY = event.pos().x(), event.pos().y()
+        # print(f"Mouse Position: ({crrX}, {crrY})")
+        if self.x is None:
+            self.x = crrX
+            self.y = crrY
+        else:
+            if crrX - self.x > 1:
+                print("Right")
+            elif crrX - self.x < -1:
+                print("Left")
+            self.x = crrX
+            if crrY - self.y > 1:
+                print("Down")
+            elif crrY - self.y < -1:
+                print("Up")
+            self.y = crrY
+        # print(f"Mouse Position: ({self.x}, {self.y})")
+        
+    def mouseReleaseEvent(self, event: QMouseEvent):
+        if event.button() == QtCore.Qt.MouseButton.LeftButton:
+            self.mouse_pressed = False
 
-    def adjust_brightness_contrast(self, image_data):
-        brightness = self.brightness_slider.value()
-        contrast = self.contrast_slider.value()
-
-        adjusted_image = np.clip(image_data + brightness, 0, 255)
-        adjusted_image = ((adjusted_image - 127) * (1 + contrast / 127) + 127).astype(np.uint8)
-
-        return adjusted_image
-
-
-class MixerWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-
-        self.image_displays = [ImageDisplay() for _ in range(4)]
-        self.mixer_display = ImageDisplay()
-        self.init_ui()
-
-    def init_ui(self):
-        central_widget = QWidget()
-        layout = QVBoxLayout(central_widget)
-
-        for image_display in self.image_displays:
-            layout.addWidget(image_display)
-
-        mixer_layout = QVBoxLayout()
-        mixer_layout.addWidget(self.mixer_display)
-        layout.addLayout(mixer_layout)
-
-        self.setCentralWidget(central_widget)
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = MixerWindow()
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = ImageDisplayApp()
     window.show()
-    app.exec_()
+    sys.exit(app.exec())

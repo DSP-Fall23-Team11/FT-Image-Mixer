@@ -292,16 +292,6 @@
            <string>Imaginary</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>Uniform Magnitude</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Uniform Phase</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>
@@ -542,16 +532,6 @@
          <item>
           <property name="text">
            <string>Imaginary</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Uniform Magnitude</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Uniform Phase</string>
           </property>
          </item>
         </widget>
@@ -796,16 +776,6 @@
            <string>Imaginary</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>Uniform Magnitude</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Uniform Phase</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>
@@ -1046,16 +1016,6 @@
          <item>
           <property name="text">
            <string>Imaginary</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Uniform Magnitude</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Uniform Phase</string>
           </property>
          </item>
         </widget>

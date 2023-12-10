@@ -15,8 +15,6 @@ class ImageModel():
         self.imaginary = np.imag(self.dft)
         self.magnitude = np.abs(self.dft)
         self.phase = np.angle(self.dft)
-        self.uniformMagnitude = np.ones(self.imgByte.shape)
-        self.uniformPhase = np.zeros(self.imgByte.shape)
     
     def updateImgDims(self,imgByte):
       self.imgByte = imgByte
@@ -26,8 +24,6 @@ class ImageModel():
       self.imaginary = np.imag(self.dft)
       self.magnitude = np.abs(self.dft)
       self.phase = np.angle(self.dft)
-      self.uniformMagnitude = np.ones(self.imgByte.shape)
-      self.uniformPhase = np.zeros(self.imgByte.shape)
 
 
     def editedImage(self, imageObject, widget,Bfactor,Cfactor):
