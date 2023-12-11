@@ -5,3 +5,4 @@ class Modes(enum.Enum):
     realAndImaginary = "testRealAndImagMode"
     magnitude = "magnitude"
     phase = "phase"
+    chooseComponent = "Choose Component"

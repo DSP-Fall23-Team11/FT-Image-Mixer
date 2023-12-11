@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1445</width>
-    <height>1163</height>
+    <height>1032</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>640</y>
-      <width>521</width>
-      <height>266</height>
+      <width>471</width>
+      <height>341</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -117,6 +117,13 @@
         <layout class="QGridLayout" name="gridLayout_33">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_34">
+           <item row="1" column="0">
+            <widget class="QLabel" name="weightSliderLabel1">
+             <property name="text">
+              <string>0 %  </string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <spacer name="verticalSpacer_2">
              <property name="orientation">
@@ -129,48 +136,6 @@
               </size>
              </property>
             </spacer>
-           </item>
-           <item row="1" column="0">
-            <widget class="QComboBox" name="imageOutputMenu1">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>Image1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image3</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image4</string>
-              </property>
-             </item>
-            </widget>
            </item>
           </layout>
          </item>
@@ -303,8 +268,8 @@
      <rect>
       <x>1110</x>
       <y>200</y>
-      <width>301</width>
-      <height>141</height>
+      <width>304</width>
+      <height>151</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_24">
@@ -355,140 +320,6 @@
      </item>
      <item row="0" column="1">
       <layout class="QGridLayout" name="gridLayout_38">
-       <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_39">
-         <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_40">
-           <item row="0" column="0">
-            <spacer name="verticalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="0">
-            <widget class="QComboBox" name="imageOutputMenu2">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>Image1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image3</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image4</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="0" column="1">
-          <layout class="QGridLayout" name="gridLayout_41">
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_42">
-             <item row="0" column="0">
-              <spacer name="verticalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="0">
-              <layout class="QGridLayout" name="gridLayout_43">
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_8">
-                 <property name="text">
-                  <string>0%</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="0" column="2">
-                <widget class="QLabel" name="label_9">
-                 <property name="text">
-                  <string>100%</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="0">
-              <widget class="QSlider" name="componentWeightSlider2">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="maximum">
-                <number>100</number>
-               </property>
-               <property name="singleStep">
-                <number>10</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="tickPosition">
-                <enum>QSlider::TicksAbove</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
        <item row="1" column="0">
         <widget class="QComboBox" name="outputComponentMenu2">
          <property name="enabled">
@@ -536,6 +367,105 @@
          </item>
         </widget>
        </item>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_39">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_40">
+           <item row="0" column="0">
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="weightSliderLabel2">
+             <property name="text">
+              <string>0 %  </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <layout class="QGridLayout" name="gridLayout_41">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_42">
+             <item row="0" column="1">
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSlider" name="componentWeightSlider2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="maximum">
+                <number>100</number>
+               </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="tickPosition">
+                <enum>QSlider::TicksAbove</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <layout class="QGridLayout" name="gridLayout_43">
+               <item row="0" column="1">
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>0%</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>100%</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
       </layout>
      </item>
     </layout>
@@ -545,7 +475,7 @@
      <rect>
       <x>1110</x>
       <y>360</y>
-      <width>301</width>
+      <width>304</width>
       <height>141</height>
      </rect>
     </property>
@@ -615,50 +545,15 @@
             </spacer>
            </item>
            <item row="1" column="0">
-            <widget class="QComboBox" name="imageOutputMenu3">
-             <property name="enabled">
-              <bool>false</bool>
+            <widget class="QLabel" name="weightSliderLabel3">
+             <property name="text">
+              <string>0 %  </string>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>Image1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image3</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image4</string>
-              </property>
-             </item>
             </widget>
            </item>
           </layout>
          </item>
-         <item row="0" column="1">
+         <item row="0" column="2">
           <layout class="QGridLayout" name="gridLayout_47">
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_48">
@@ -843,6 +738,13 @@
         <layout class="QGridLayout" name="gridLayout_51">
          <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_52">
+           <item row="1" column="0">
+            <widget class="QLabel" name="weightSliderLabel4">
+             <property name="text">
+              <string>0 %  </string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <spacer name="verticalSpacer_11">
              <property name="orientation">
@@ -855,48 +757,6 @@
               </size>
              </property>
             </spacer>
-           </item>
-           <item row="1" column="0">
-            <widget class="QComboBox" name="imageOutputMenu4">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="acceptDrops">
-              <bool>false</bool>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>Image1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image3</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Image4</string>
-              </property>
-             </item>
-            </widget>
            </item>
           </layout>
          </item>
@@ -1078,7 +938,144 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
+      <widget class="ImageView" name="originalImage1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="ImageView" name="ftComponent1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="ImageView" name="ftComponent2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="ImageView" name="originalImage2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QComboBox" name="ftComponentMenu2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Choose FT Component</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Magnitude</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Phase</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Real Components</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FT Imaginary Components</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>FT Component 2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Original Image 1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>Choose FT Component</string>
+       </property>
+      </widget>
+     </item>
      <item row="5" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>FT Component 1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Original Image 2</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_7"/>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_8"/>
+     </item>
+     <item row="4" column="0">
       <widget class="QComboBox" name="ftComponentMenu1">
        <property name="enabled">
         <bool>false</bool>
@@ -1116,215 +1113,12 @@
        </item>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="label_17">
        <property name="text">
         <string>Choose FT Component</string>
        </property>
       </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="ImageView" name="originalImage1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QLabel" name="label_24">
-         <property name="text">
-          <string>Contrast   </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="contrastSlider1">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="label_25">
-         <property name="text">
-          <string>Contrast   </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="contrastSlider2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="7" column="0">
-      <widget class="ImageView" name="ftComponent1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="ImageView" name="ftComponent2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="ImageView" name="originalImage2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QComboBox" name="ftComponentMenu2">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <item>
-        <property name="text">
-         <string>Choose FT Component</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>FT Magnitude</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>FT Phase</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>FT Real Components</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>FT Imaginary Components</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>FT Component 2</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>FT Component 1</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Original Image 2</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Original Image 1</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLabel" name="label_18">
-       <property name="text">
-        <string>Choose FT Component</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
-       <item>
-        <widget class="QLabel" name="label_30">
-         <property name="text">
-          <string>Brightnees</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="brightnessSlider1">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
-       <item>
-        <widget class="QLabel" name="label_31">
-         <property name="text">
-          <string>Brightnees</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="brightnessSlider2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </item>
     </layout>
    </widget>
@@ -1338,50 +1132,98 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="1">
+      <widget class="ImageView" name="originalImage4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="ImageView" name="ftComponent3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="ImageView" name="originalImage3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
      <item row="6" column="1">
+      <widget class="ImageView" name="ftComponent4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>Original Image 4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Original Image 3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_10"/>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_9"/>
+     </item>
+     <item row="5" column="1">
       <widget class="QLabel" name="label_16">
        <property name="text">
         <string>FT Component 4</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_26">
-         <property name="text">
-          <string>Contrast   </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="contrastSlider3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <item>
-        <widget class="QLabel" name="label_29">
-         <property name="text">
-          <string>Contrast   </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="contrastSlider4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="5" column="0">
+     <item row="4" column="0">
       <widget class="QComboBox" name="ftComponentMenu3">
        <property name="enabled">
         <bool>false</bool>
@@ -1413,7 +1255,14 @@
        </item>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>FT Component 3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
       <widget class="QComboBox" name="ftComponentMenu4">
        <property name="enabled">
         <bool>false</bool>
@@ -1445,140 +1294,19 @@
        </item>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_15">
-       <property name="text">
-        <string>FT Component 3</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_19">
-       <property name="text">
-        <string>Choose FT Component</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
+     <item row="3" column="1">
       <widget class="QLabel" name="label_20">
        <property name="text">
         <string>Choose FT Component</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_14">
-       <property name="text">
-        <string>Original Image 4</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Original Image 3</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="ImageView" name="originalImage4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="ImageView" name="ftComponent3">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="ImageView" name="ftComponent4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="ImageView" name="originalImage3">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
      <item row="3" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_9">
-       <item>
-        <widget class="QLabel" name="label_32">
-         <property name="text">
-          <string>Brightnees</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="brightnessSlider3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
-       <item>
-        <widget class="QLabel" name="label_33">
-         <property name="text">
-          <string>Brightnees</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSlider" name="brightnessSlider4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="label_19">
+       <property name="text">
+        <string>Choose FT Component</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
