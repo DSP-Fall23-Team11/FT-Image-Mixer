@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel, QVBoxLayout, QWidget, QSlider, QComboBox, QGraphicsRectItem
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor
-from PyQt5.QtCore import Qt, QRectF
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel, QVBoxLayout, QWidget, QSlider, QComboBox, QGraphicsRectItem,QGraphicsView,QGraphicsScene
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor,QMouseEvent
+from PyQt5.QtCore import Qt, QRectF,pyqtSignal
 import sys
 import logging
 import numpy as np
@@ -50,6 +50,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.brightnessSliders[i].setMaximum(75)
             self.brightnessSliders[i].setMinimum(-75)
             self.brightnessSliders[i].setValue(0)
+        self.x = None
+        self.y = None
+        self.trackIndex=0
+        self.contrastFactor=1
+        self.brightnessFactor=0
         init_connectors(self)
         self.setupImagesView()
 
@@ -91,10 +96,12 @@ class MainWindow(QtWidgets.QMainWindow):
            # print("Double-clicked!"+str(idx))
             self.loadFile(idx)
             self.enableOutputCombos(idx)
+
     def enableOutputCombos(self,index):
         self.allComboBoxes[index].setEnabled(True)
         self.outputComboBoxes[index].setEnabled(True)
-        self.outputRatioSliders[index].setEnabled(True)            
+        self.outputRatioSliders[index].setEnabled(True)  
+
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
         fShift = np.fft.fftshift(self.imagesModels[idx-1].dft)
@@ -121,6 +128,59 @@ class MainWindow(QtWidgets.QMainWindow):
        self.displayImage(output,self.outputImages[outputIdx])     
         # Mixer Logic IFFT    
 
+    def mousePressEvent(self, event: QMouseEvent):
+
+          for i in range(4):
+            if (
+                event.button() == Qt.MouseButton.RightButton
+                and (self.inputImages[i].underMouse())    
+            ):  
+
+                self.inputImages[i].setEnabled(False)
+                self.mouse_pressed = True
+                self.trackIndex=i
+                self.track_mouse_position(event)
+
+    def mouseMoveEvent(self, event: QMouseEvent):
+        for i in range(4):
+            if self.mouse_pressed and (self.inputImages[i].underMouse()): self.track_mouse_position(event)
+            
+    def track_mouse_position(self, event: QMouseEvent):
+        # Track mouse position when clicking and holding on label1
+        crrX, crrY = event.pos().x(), event.pos().y()
+        # print(f"Mouse Position: ({crrX}, {crrY})")
+        if self.x is None:
+            self.x = crrX
+            self.y = crrY
+        else:
+            if crrX - self.x > 1: #Right higher brightness 
+                #print("Right")
+                self.brightnessFactor+=0.05
+                if self.brightnessFactor>0.75:
+                    self.brightnessFactor=0.75
+            elif crrX - self.x < -1: #Left Lower brightness
+                #print("Left")
+                self.brightnessFactor-=0.05
+                if self.brightnessFactor<-0.75:
+                    self.brightnessFactor=-0.75
+            self.x = crrX
+            if crrY - self.y > 1:
+                self.contrastFactor-=0.05
+                if self.contrastFactor<0.1:
+                    self.contrastFactor=0.1
+                #print("Down")
+            elif crrY - self.y < -1:
+                self.contrastFactor+=0.05
+                if self.contrastFactor>1.5:
+                    self.contrastFactor=1.5
+                #print("Up")
+            self.y = crrY
+            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
+        # print(f"Mouse Position: ({self.x}, {self.y})")
+
+    def mouseReleaseEvent(self, event: QMouseEvent):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.mouse_pressed = False
                 
             
 
