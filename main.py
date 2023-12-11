@@ -29,7 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.inputImages = [self.originalImage1, self.originalImage2,self.originalImage3,self.originalImage4]
         self.ftComponentImages = [self.ftComponent1, self.ftComponent2,self.ftComponent3,self.ftComponent4]
         self.outputImages = [self.outputImage1, self.outputImage2]
-        self.imagesModels = [ImageModel("BLACK.png"), ImageModel("BLACK.png"), ImageModel("BLACK.png"), ImageModel("BLACK.png")]
+        self.imagesModels = [..., ..., ..., ...]
         self.imageWidgets = [self.originalImage1, self.originalImage2, self.originalImage3, self.originalImage4, self.ftComponent1, self.ftComponent2,
                              self.ftComponent3,self.ftComponent4,
                              self.outputImage1, self.outputImage2]
@@ -99,9 +99,13 @@ class MainWindow(QtWidgets.QMainWindow):
             # print("Double-clicked!"+str(idx))
             self.loadFile(idx)
             self.enableOutputCombos(idx)
-            self.enableOutputOptions()
+            self.enableOutputOptions()     
+
+
     def enableOutputCombos(self,index):
-        self.allComboBoxes[index].setEnabled(True)            
+        self.allComboBoxes[index].setEnabled(True)   
+
+
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
         fShift = np.fft.fftshift(self.imagesModels[idx-1].dft)
@@ -148,12 +152,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.y = crrY
         else:
             if crrX - self.x > 1: #Right higher brightness 
-                print("Right")
+                # print("Right")
                 self.brightnessFactor+=0.05
                 if self.brightnessFactor>0.75:
                     self.brightnessFactor=0.75
             elif crrX - self.x < -1: #Left Lower brightness
-                print("Left")
+                # print("Left")
                 self.brightnessFactor-=0.05
                 if self.brightnessFactor<-0.75:
                     self.brightnessFactor=-0.75
@@ -162,14 +166,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.contrastFactor-=0.05
                 if self.contrastFactor<0.1:
                     self.contrastFactor=0.1
-                print("Down")
+                # print("Down")
             elif crrY - self.y < -1:
                 self.contrastFactor+=0.05
                 if self.contrastFactor>1.5:
                     self.contrastFactor=1.5
-                print("Up")
+                # print("Up")
             self.y = crrY
-            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor)
+            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)
         # print(f"Mouse Position: ({self.x}, {self.y})")
         
     def mouseReleaseEvent(self, event: QMouseEvent):
