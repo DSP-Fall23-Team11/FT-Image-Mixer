@@ -29,7 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.inputImages = [self.originalImage1, self.originalImage2,self.originalImage3,self.originalImage4]
         self.ftComponentImages = [self.ftComponent1, self.ftComponent2,self.ftComponent3,self.ftComponent4]
         self.outputImages = [self.outputImage1, self.outputImage2]
-        self.imagesModels = [..., ... , ... , ... ]
+        self.imagesModels = [ImageModel("BLACK.png"), ImageModel("BLACK.png"), ImageModel("BLACK.png"), ImageModel("BLACK.png")]
         self.imageWidgets = [self.originalImage1, self.originalImage2, self.originalImage3, self.originalImage4, self.ftComponent1, self.ftComponent2,
                              self.ftComponent3,self.ftComponent4,
                              self.outputImage1, self.outputImage2]
@@ -51,6 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.brightnessSliders[i].setValue(0)
         self.x = None
         self.y = None
+        self.trackIndex=0
         self.contrastFactor=1
         self.brightnessFactor=0
         self.init_connectors()
@@ -90,8 +91,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def displayImage(self, data, widget):
                 widget.setImage(data)
-                widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
-                                   padding=0)
+                # widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
+                #                    padding=0)
                 widget.ui.roiPlot.hide()    
                         
     def on_mouse_click(self,idx):
@@ -120,46 +121,60 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.componentWeightSliders[i].setEnabled(True)
 
     def mousePressEvent(self, event: QMouseEvent):
-        if (
-            event.button() == Qt.MouseButton.RightButton
-            and self.originalImage1.geometry().contains(event.pos())
-        ):  
-            self.originalImage1.setEnabled(False)
-            self.mouse_pressed = True
-            self.track_mouse_position(event)
+          
+          for i in range(4):
+            if (
+                event.button() == Qt.MouseButton.RightButton
+                and (self.inputImages[i].underMouse())    
+            ):  
+                
+                self.inputImages[i].setEnabled(False)
+                self.mouse_pressed = True
+                self.trackIndex=i
+                self.track_mouse_position(event)
 
     def mouseMoveEvent(self, event: QMouseEvent):
-        if self.mouse_pressed:
-            self.track_mouse_position(event)
+        for i in range(4):
+            if self.mouse_pressed and (self.inputImages[i].underMouse()): 
 
+                self.track_mouse_position(event)
+        
     def track_mouse_position(self, event: QMouseEvent):
         # Track mouse position when clicking and holding on label1
         crrX, crrY = event.pos().x(), event.pos().y()
-        # print(f"Mouse Position: ({crrX}, {crrY})")
+        # print(f"Mouse Position: ({crrX}, {crrY})s")
         if self.x is None:
             self.x = crrX
             self.y = crrY
         else:
             if crrX - self.x > 1: #Right higher brightness 
                 print("Right")
-                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor+0.4,self.contrastFactor)
+                self.brightnessFactor+=0.05
+                if self.brightnessFactor>0.75:
+                    self.brightnessFactor=0.75
             elif crrX - self.x < -1: #Left Lower brightness
                 print("Left")
-                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor-0.4,self.contrastFactor)
+                self.brightnessFactor-=0.05
+                if self.brightnessFactor<-0.75:
+                    self.brightnessFactor=-0.75
             self.x = crrX
             if crrY - self.y > 1:
-                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor,self.contrastFactor-0.4)
+                self.contrastFactor-=0.05
+                if self.contrastFactor<0.1:
+                    self.contrastFactor=0.1
                 print("Down")
             elif crrY - self.y < -1:
-                ImageModel.editedImage(self,self.imagesModels[0],self.inputImages[0],self.brightnessFactor,self.contrastFactor+0.4)
+                self.contrastFactor+=0.05
+                if self.contrastFactor>1.5:
+                    self.contrastFactor=1.5
                 print("Up")
             self.y = crrY
+            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor)
         # print(f"Mouse Position: ({self.x}, {self.y})")
         
     def mouseReleaseEvent(self, event: QMouseEvent):
         if event.button() == Qt.MouseButton.LeftButton:
             self.mouse_pressed = False
-    
     def init_connectors(self):
 
         self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
