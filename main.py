@@ -146,11 +146,11 @@ class MainWindow(QtWidgets.QMainWindow):
        weights = [i.value() for  i in self.outputRatioSliders]
        self.myMixer.setWeights(weights)
        if selectedOutputComponents[0] == "Magnitude" or selectedOutputComponents[0] == "Phase":
-            self.handleOutputCombosChange(Modes.magnitudeAndPhase)
-            output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase)
+            #self.handleOutputCombosChange(Modes.magnitudeAndPhase)
+            output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase,selectedOutputComponents)
        elif selectedOutputComponents[0] == "Real"  or selectedOutputComponents[0] == "Imaginary":
-            self.handleOutputCombosChange(Modes.realAndImaginary)
-            output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary)
+           # self.handleOutputCombosChange(Modes.realAndImaginary)
+            output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary,selectedOutputComponents)
        self.displayImage(output,self.outputImages[outputIdx])     
         # Mixer Logic IFFT    
     ###########################################################################
