@@ -16,6 +16,11 @@ class ImageModel():
         self.imaginary = np.imag(self.dft)
         self.magnitude = np.abs(self.dft)
         self.phase = np.angle(self.dft)
+        self.fShift = np.fft.fftshift(self.dft)
+        self.magnitudePlot = 20 * np.log(np.abs(self.fShift))
+        self.phasePlot = np.angle(self.fShift)
+        self.realPlot = 20 * np.log(np.real(self.fShift))
+        self.imaginaryPlot = np.imag(self.fShift)
     
     def updateImgDims(self,imgByte):
       self.imgByte = imgByte
@@ -25,6 +30,11 @@ class ImageModel():
       self.imaginary = np.imag(self.dft)
       self.magnitude = np.abs(self.dft)
       self.phase = np.angle(self.dft)
+      self.fShift = np.fft.fftshift(self.dft)
+      self.magnitudePlot = 20 * np.log(np.abs(self.fShift))
+      self.phasePlot = np.angle(self.fShift)
+      self.realPlot = 20 * np.log(np.real(self.fShift))
+      self.imaginaryPlot = np.imag(self.fShift)
 
 
     def editedImage(self, imageObject, widget,Bfactor,Cfactor,idx):

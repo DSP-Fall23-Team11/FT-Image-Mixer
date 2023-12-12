@@ -938,71 +938,14 @@
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="ImageView" name="originalImage1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="ImageView" name="ftComponent1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
+     <item row="5" column="1">
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>Choose FT Component</string>
        </property>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="ImageView" name="ftComponent2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="ImageView" name="originalImage2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
       <widget class="QComboBox" name="ftComponentMenu2">
        <property name="enabled">
         <bool>false</bool>
@@ -1034,7 +977,14 @@
        </item>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>FT Component 1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>FT Component 2</string>
@@ -1048,20 +998,6 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_18">
-       <property name="text">
-        <string>Choose FT Component</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>FT Component 1</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="1">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -1069,13 +1005,10 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_7"/>
-     </item>
-     <item row="2" column="1">
+     <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_8"/>
      </item>
-     <item row="4" column="0">
+     <item row="6" column="0">
       <widget class="QComboBox" name="ftComponentMenu1">
        <property name="enabled">
         <bool>false</bool>
@@ -1113,43 +1046,18 @@
        </item>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_7"/>
+     </item>
+     <item row="5" column="0">
       <widget class="QLabel" name="label_17">
        <property name="text">
         <string>Choose FT Component</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>40</y>
-      <width>531</width>
-      <height>531</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_2">
      <item row="1" column="1">
-      <widget class="ImageView" name="originalImage4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="ImageView" name="ftComponent3">
+      <widget class="ImageView" name="originalImage2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -1165,7 +1073,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="ImageView" name="originalImage3">
+      <widget class="ImageView" name="originalImage1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -1180,33 +1088,41 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="ImageView" name="ftComponent4">
+     <item row="9" column="1">
+      <widget class="GraphicsLayoutWidget" name="plot_ft2" native="true">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>0</height>
+         <width>271</width>
+         <height>207</height>
         </size>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_14">
-       <property name="text">
-        <string>Original Image 4</string>
-       </property>
-      </widget>
+     <item row="9" column="0">
+      <widget class="GraphicsLayoutWidget" name="plot_ft1" native="true"/>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_5">
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>40</y>
+      <width>551</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_15">
        <property name="text">
-        <string>Original Image 3</string>
+        <string>FT Component 3</string>
        </property>
       </widget>
      </item>
@@ -1255,10 +1171,59 @@
        </item>
       </widget>
      </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_15">
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_14">
        <property name="text">
-        <string>FT Component 3</string>
+        <string>Original Image 4</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Original Image 3</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="GraphicsLayoutWidget" name="plot_ft3" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>271</width>
+         <height>207</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="ImageView" name="originalImage4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="ImageView" name="originalImage3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -1308,6 +1273,16 @@
        </property>
       </widget>
      </item>
+     <item row="6" column="1">
+      <widget class="GraphicsLayoutWidget" name="plot_ft4" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>271</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="ImageView" name="outputImage2">
@@ -1316,7 +1291,7 @@
       <x>560</x>
       <y>640</y>
       <width>521</width>
-      <height>266</height>
+      <height>341</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -1346,6 +1321,12 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>GraphicsLayoutWidget</class>
+   <extends>QWidget</extends>
+   <header>pyqtgraph</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>ImageView</class>
    <extends>QGraphicsView</extends>

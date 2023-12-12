@@ -2,8 +2,10 @@ from PyQt5 import QtWidgets, uic, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel, QVBoxLayout, QWidget, QSlider, QComboBox, QGraphicsRectItem,QGraphicsView,QGraphicsScene
 from PyQt5.QtGui import QPixmap, QImage, QPainter, QPen, QColor,QMouseEvent
 from PyQt5.QtCore import Qt, QRectF,pyqtSignal,QFile,QTextStream
+from PyQt5.QtCore import Qt, QRectF, QObject, pyqtSignal
 import sys
 import logging
+import pyqtgraph as pg
 import numpy as np
 import cv2
 import time
@@ -23,17 +25,20 @@ logging.basicConfig(level=logging.DEBUG,
 # Creating an object
 logger = logging.getLogger()
 
+class SignalEmitter(QObject):    
+    sig_ROI_changed = pyqtSignal()
+
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi('mainwindow.ui', self)
         self.apply_stylesheet("ManjaroMix.qss")
         self.inputImages = [self.originalImage1, self.originalImage2,self.originalImage3,self.originalImage4]
-        self.ftComponentImages = [self.ftComponent1, self.ftComponent2,self.ftComponent3,self.ftComponent4]
+        
         self.outputImages = [self.outputImage1, self.outputImage2]
         self.imagesModels = [..., ... , ... , ... ]
-        self.imageWidgets = [self.originalImage1, self.originalImage2, self.originalImage3, self.originalImage4, self.ftComponent1, self.ftComponent2,
-                             self.ftComponent3,self.ftComponent4,
+        self.imageWidgets = [self.originalImage1, self.originalImage2, self.originalImage3, self.originalImage4,
                              self.outputImage1, self.outputImage2]
         self.heights = [..., ... , ... , ...]
         self.weights = [..., ... , ... , ...]
@@ -50,6 +55,48 @@ class MainWindow(QtWidgets.QMainWindow):
         self.brightnessFactor=0
         init_connectors(self)
         self.setupImagesView()
+        ###############################################################################
+        self.sig_emitter = SignalEmitter()
+
+        self.ROI_Maxbounds = QRectF(0, 0, 600,600 )    
+        
+        self.initial_roi_position = None
+        self.plotFtImg1 = self.setupFtComponentsView(0,self.plot_ft1)
+        self.plotFtImg2 = self.setupFtComponentsView(1,self.plot_ft2)
+        self.plotFtImg3 = self.setupFtComponentsView(2,self.plot_ft3)
+        self.plotFtImg4 = self.setupFtComponentsView(3,self.plot_ft4)
+        self.ftComponentImages = [self.plotFtImg1, self.plotFtImg2,self.plotFtImg3,self.plotFtImg4]
+        self.ftComponentWidgets = [self.plot_ft1, self.plot_ft2,self.plot_ft3,self.plot_ft4]
+       
+
+    def setupFtComponentsView(self , idx , widget ):
+        ft_view = widget.addViewBox()
+        ft_view.setAspectLocked(True)
+        ft_view.setMouseEnabled(x=False, y=False)
+
+        
+        imgFtComponent = pg.ImageItem()
+        ft_view.addItem(imgFtComponent)
+
+                # Testing ROI
+        ft_roi = pg.ROI(pos = ft_view.viewRect().center(), size = (300, 300), hoverPen='b', resizable= True, invertible= True, rotatable= False, maxBounds= self.ROI_Maxbounds)
+        ft_view.addItem(ft_roi)
+        self.add_scale_handles_ROI(ft_roi)      
+        
+        ft_roi.sigRegionChangeFinished.connect(lambda: self.region_update(idx,ft_roi,finish = True))
+        return imgFtComponent
+
+    def region_update(self,idx,ft_roi , finish = False):
+        if finish:
+            self.sig_emitter.sig_ROI_changed.emit()
+        new_img = ft_roi.getArrayRegion(self.imagesModels[idx].fShift, self.ftComponentImages[idx])
+        self.imagesModels[idx].updateImgDims(np.fft.ifft2(np.fft.ifftshift(new_img)))
+        
+        
+    def add_scale_handles_ROI(self, roi : pg.ROI):
+        positions = np.array([[0,0], [1,0], [1,1], [0,1]])
+        for pos in positions:        
+            roi.addScaleHandle(pos = pos, center = 1 - pos)
 
     def apply_stylesheet(self, stylesheet_path):
         stylesheet = QFile(stylesheet_path)
@@ -92,9 +139,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def displayImage(self, data, widget):
                 widget.setImage(data)
-                #widget.view.setRange(xRange=[0, self.imagesModels[0].imgShape[0]], yRange=[0, self.imagesModels[0].imgShape[1]],
-                #                    padding=0)
-                widget.ui.roiPlot.hide()            
+                if not isinstance(widget, pg.ImageItem): 
+                     widget.ui.roiPlot.hide()
+    
     def on_mouse_click(self,idx):
            # print("Double-clicked!"+str(idx))
             self.loadFile(idx)
@@ -103,12 +150,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
-        fShift = np.fft.fftshift(self.imagesModels[idx-1].dft)
-        magnitude = 20 * np.log(np.abs(fShift))
-        phase = np.angle(fShift)
-        real = 20 * np.log(np.real(fShift))
-        imaginary = np.imag(fShift)
-        FtComponentsData = [0*magnitude,magnitude,phase,real,imaginary]
+        # fShift = np.fft.fftshift(self.imagesModels[idx-1].dft)
+        # magnitude = 20 * np.log(np.abs(fShift))
+        # phase = np.angle(fShift)
+        # real = 20 * np.log(np.real(fShift))
+        # imaginary = np.imag(fShift)
+        FtComponentsData = [0*self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].phasePlot,\
+                            self.imagesModels[idx-1].realPlot,self.imagesModels[idx-1].imaginaryPlot]
+        # self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
 
     def enableOutputRatioSlider(self,index):
