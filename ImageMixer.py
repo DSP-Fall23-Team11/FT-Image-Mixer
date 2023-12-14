@@ -41,10 +41,10 @@ class ImageMixer():
             magnitudeWeights, phaseWeights = self.generateModesWeights(selectedOutputComponents)
             for i,weight in  enumerate(magnitudeWeights):
                 if weight!= 0:
-                    magnitudeMix += weight*imagesModels[i].magnitude
+                    magnitudeMix += weight*imagesModels[i].editedmagnitude
             for i,weight in  enumerate(phaseWeights):
                 if weight!= 0:
-                    phaseMix += weight*imagesModels[i].phase        
+                    phaseMix += weight*imagesModels[i].editedphase        
             return abs(np.real(np.fft.ifft2(np.multiply(magnitudeMix,np.exp(1j * phaseMix)))))        
         elif mode == Modes.realAndImaginary:
             realMix = 0
@@ -52,10 +52,10 @@ class ImageMixer():
             realWeights, imaginaryWeights = self.generateModesWeights(selectedOutputComponents)
             for i,weight in  enumerate(realWeights):
                 if weight!= 0:
-                    realMix += weight*imagesModels[i].real
+                    realMix += weight*imagesModels[i].editedreal
             for i,weight in  enumerate(imaginaryWeights):
                 if weight!= 0:
-                    imaginaryMix += weight*imagesModels[i].imaginary        
+                    imaginaryMix += weight*imagesModels[i].editedimaginary        
             return abs(np.real(np.fft.ifft2(realMix+ 1j*imaginaryMix))) 
 
 

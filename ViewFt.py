@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QSlider
 from PyQt5.QtCore import Qt, QRectF, QObject, pyqtSignal
 from PyQt5.QtCore import QPointF
 
-
+from PIL import Image
 
 
 class SignalEmitter(QObject):
@@ -25,7 +25,10 @@ class ViewFt():
           self.plotFtImg = self.setupFtComponentsView(widget)
           # self.ftComponentWidgets = [self.plot_ft1, self.plot_ft2,self.plot_ft3,self.plot_ft4]
         
-      
+      def setRoiMaxBounds(self):
+          self.ROI_Maxbounds.adjust(0, 0, self.plotFtImg.width(), self.plotFtImg.height())
+      def setImageModel(self, imageModel):
+          self.imageModel=imageModel
 
       def setupFtComponentsView(self,widget ):
         ft_view = widget.addViewBox()
@@ -46,10 +49,14 @@ class ViewFt():
       def region_update(self,ft_roi , finish = False):
         if finish:
             self.sig_emitter.sig_ROI_changed.emit()
+            print("fel port",self.imageModel)
         new_img = ft_roi.getArrayRegion(self.imageModel.fShift,self.plotFtImg)
         self.imageModel.updateImgDims(np.fft.ifft2(np.fft.ifftshift(new_img)))
+        exportedImg = np.fft.ifft2(np.fft.ifftshift(new_img))
+        image_to_save = Image.fromarray(np.abs(exportedImg).astype(np.uint8))
+        image_to_save.save('output_image.png')
 
       def add_scale_handles_ROI(self, roi : pg.ROI):
         positions = np.array([[0,0], [1,0], [1,1], [0,1]])
         for pos in positions:        
-            roi.addScaleHandle(pos = pos, center = 1 - pos)
+            self.ft_roi.addScaleHandle(pos = pos, center = 1 - pos)

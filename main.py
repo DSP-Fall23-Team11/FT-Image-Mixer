@@ -68,41 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.viewport2.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport2.ft_roi))
         self.viewport3.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport3.ft_roi))
         self.viewport4.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport4.ft_roi))
-        # self.sig_emitter = SignalEmitter()
 
-        # self.ROI_Maxbounds = QRectF(0, 0, 600,600 )    
-        
-        # self.initial_roi_position = None
-        # self.plotFtImg1 = self.setupFtComponentsView(0,self.plot_ft1)
-        # self.plotFtImg2 = self.setupFtComponentsView(1,self.plot_ft2)
-        # self.plotFtImg3 = self.setupFtComponentsView(2,self.plot_ft3)
-        # self.plotFtImg4 = self.setupFtComponentsView(3,self.plot_ft4)
-        # self.ftComponentImages = [self.plotFtImg1, self.plotFtImg2,self.plotFtImg3,self.plotFtImg4]
-        # self.ftComponentWidgets = [self.plot_ft1, self.plot_ft2,self.plot_ft3,self.plot_ft4]
-       
-
-    # def setupFtComponentsView(self , idx , widget ):
-    #     ft_view = widget.addViewBox()
-    #     ft_view.setAspectLocked(True)
-    #     ft_view.setMouseEnabled(x=False, y=False)
-
-        
-    #     imgFtComponent = pg.ImageItem()
-    #     ft_view.addItem(imgFtComponent)
-
-    #             # Testing ROI
-    #     ft_roi = pg.ROI(pos = ft_view.viewRect().center(), size = (300, 300), hoverPen='b', resizable= True, invertible= True, rotatable= False, maxBounds= self.ROI_Maxbounds)
-    #     ft_view.addItem(ft_roi)
-    #     self.add_scale_handles_ROI(ft_roi)      
-        
-    #     ft_roi.sigRegionChangeFinished.connect(lambda: self.region_update(idx,ft_roi,finish = True))
-    #     return imgFtComponent
-
-    # def region_update(self,idx,ft_roi , finish = False):
-    #     if finish:
-    #         self.sig_emitter.sig_ROI_changed.emit()
-    #     new_img = ft_roi.getArrayRegion(self.imagesModels[idx].fShift, self.ftComponentImages[idx])
-    #     self.imagesModels[idx].updateImgDims(np.fft.ifft2(np.fft.ifftshift(new_img)))
 
     def modify_all_regions(self, roi: pg.ROI):
         new_state = roi.getState()
@@ -110,13 +76,9 @@ class MainWindow(QtWidgets.QMainWindow):
             if view.ft_roi is not roi:
                 view.ft_roi.setState(new_state, update = False) # Set the state of the other views without sending update signal
                 view.ft_roi.stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
-                view.region_update(finish = False)    
+                view.region_update(view.ft_roi,finish = False)    
         
-        
-    # def add_scale_handles_ROI(self, roi : pg.ROI):
-    #     positions = np.array([[0,0], [1,0], [1,1], [0,1]])
-    #     for pos in positions:        
-    #         roi.addScaleHandle(pos = pos, center = 1 - pos)
+
 
     def apply_stylesheet(self, stylesheet_path):
         stylesheet = QFile(stylesheet_path)
@@ -140,11 +102,13 @@ class MainWindow(QtWidgets.QMainWindow):
             # self.myStorage = Storage(self.imagesModels)
             self.myStorage.setImageModels(self.imagesModels)
             self.myStorage.unifyImagesSize()
+            self.viewports[imgID].setImageModel(self.imagesModels[imgID])
             self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
                     #  print("ana "+str(i+1),img.imgShape)
                       self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
+                    #  self.viewports[i].setRoiMaxBounds()
                     #   cv2.imwrite("output_image"+str(i+1)+".jpg", img.imgByte)
                       self.inputImages[i].export("mama"+str(i)+".jpg")
 
