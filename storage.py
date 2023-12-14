@@ -25,7 +25,7 @@ class Storage():
                  
            for index , img in enumerate(self.ImagesModels):
                if(type(resized_images[index])!=type(...)):
-                   img.updateImgDims(resized_images[index])
+                   img.SetImageParams(resized_images[index])
                    
 
                 

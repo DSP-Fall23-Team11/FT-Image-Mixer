@@ -68,6 +68,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.viewport2.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport2.ft_roi))
         self.viewport3.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport3.ft_roi))
         self.viewport4.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport4.ft_roi))
+        self.componentWeightSlider1.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport1.ft_roi))
+        self.componentWeightSlider2.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport2.ft_roi))
+        self.componentWeightSlider3.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport3.ft_roi))
+        self.componentWeightSlider4.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport4.ft_roi))
+        
 
 
     def modify_all_regions(self, roi: pg.ROI):
@@ -98,18 +103,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 return 
             image = cv2.imread(self.filename, flags=cv2.IMREAD_GRAYSCALE).T
             self.imagesModels[imgID] = ImageModel(self.filename)
-           # self.heights[imgID], self.weights[imgID] = image.shape
-            # self.myStorage = Storage(self.imagesModels)
             self.myStorage.setImageModels(self.imagesModels)
             self.myStorage.unifyImagesSize()
             self.viewports[imgID].setImageModel(self.imagesModels[imgID])
             self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
-                    #  print("ana "+str(i+1),img.imgShape)
+                      print("ana "+str(i+1),img.imgShape)
                       self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
-                    #  self.viewports[i].setRoiMaxBounds()
-                    #   cv2.imwrite("output_image"+str(i+1)+".jpg", img.imgByte)
                       self.inputImages[i].export("mama"+str(i)+".jpg")
 
     def setupImagesView(self):
@@ -134,14 +135,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
-        # fShift = np.fft.fftshift(self.imagesModels[idx-1].dft)
-        # magnitude = 20 * np.log(np.abs(fShift))
-        # phase = np.angle(fShift)
-        # real = 20 * np.log(np.real(fShift))
-        # imaginary = np.imag(fShift)
         FtComponentsData = [0*self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].phasePlot,\
                             self.imagesModels[idx-1].realPlot,self.imagesModels[idx-1].imaginaryPlot]
-        # self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
 
     def enableOutputRatioSlider(self,index):
@@ -174,15 +169,12 @@ class MainWindow(QtWidgets.QMainWindow):
        print("mama")
        output  = ...
        outputIdx = self.outputChannelMenu.currentIndex()
-      # currentMode = self.outputComboBoxes[0].currentText()
        selectedOutputComponents = [  i.currentText() for i in self.outputComboBoxes] 
        weights = [i.value() for  i in self.outputRatioSliders]
        self.myMixer.setWeights(weights)
        if selectedOutputComponents[0] == "Magnitude" or selectedOutputComponents[0] == "Phase":
-            #self.handleOutputCombosChange(Modes.magnitudeAndPhase)
             output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase,selectedOutputComponents)
        elif selectedOutputComponents[0] == "Real"  or selectedOutputComponents[0] == "Imaginary":
-           # self.handleOutputCombosChange(Modes.realAndImaginary)
             output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary,selectedOutputComponents)
        self.displayImage(output,self.outputImages[outputIdx])     
         # Mixer Logic IFFT    
