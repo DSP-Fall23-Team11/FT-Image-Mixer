@@ -65,8 +65,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ftComponentImages.append(viewport.plotFtImg)
         
         for i, viewport in enumerate(self.viewports):
-            viewport.sig_emitter.sig_ROI_changed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.ft_roi))
-            self.componentWeightSliders[i].sliderPressed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.ft_roi))
+            viewport.sig_emitter.sig_ROI_changed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.getRoi()))
+            self.componentWeightSliders[i].sliderPressed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.getRoi()))
         init_connectors(self)
         self.setupImagesView()
 
@@ -74,10 +74,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def modify_all_regions(self, roi: pg.ROI):
         new_state = roi.getState()
         for view in self.viewports:
-            if view.ft_roi is not roi:
-                view.ft_roi.setState(new_state, update = False) # Set the state of the other views without sending update signal
-                view.ft_roi.stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
-                view.region_update(view.ft_roi,finish = False)    
+            if view.getRoi() is not roi:
+                view.getRoi().setState(new_state, update = False) # Set the state of the other views without sending update signal
+                view.getRoi().stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
+                view.region_update(view.getRoi(),finish = False)    
         
 
 
@@ -102,11 +102,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.myStorage.setImageModels(self.imagesModels)
             self.myStorage.unifyImagesSize()
             self.viewports[imgID].setImageModel(self.imagesModels[imgID])
-            self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
+            self.displayImage(self.imagesModels[imgID].getImgByte(), self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
                       print("ana "+str(i+1),img.imgShape)
-                      self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
+                      self.displayImage(self.imagesModels[i].getImgByte(), self.inputImages[i])
                       self.inputImages[i].export("mama"+str(i)+".jpg")
 
     def setupImagesView(self):
@@ -131,8 +131,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
-        FtComponentsData = [0*self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].phasePlot,\
-                            self.imagesModels[idx-1].realPlot,self.imagesModels[idx-1].imaginaryPlot]
+        FtComponentsData = [0*self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getPhasePlot(),\
+                            self.imagesModels[idx-1].getRealPlot(),self.imagesModels[idx-1].getImaginaryPlot()]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
 
     def enableOutputRatioSlider(self,index):
@@ -217,7 +217,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 if self.contrastFactor>1.5:
                     self.contrastFactor=1.5
             self.y = crrY
-            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
+            ImageModel.alterContrastAndBrightness(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
 
     def mouseReleaseEvent(self, event: QMouseEvent):
         if event.button() == Qt.MouseButton.LeftButton:
