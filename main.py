@@ -49,39 +49,35 @@ class MainWindow(QtWidgets.QMainWindow):
         self.outputComboBoxes = [self.outputComponentMenu1,self.outputComponentMenu2,self.outputComponentMenu3,self.outputComponentMenu4 ]
         self.outputRatioSliders = [self.componentWeightSlider1,self.componentWeightSlider2,self.componentWeightSlider3,self.componentWeightSlider4]
         self.outputRatioSlidersLabels = [self.weightSliderLabel1,self.weightSliderLabel2,self.weightSliderLabel3,self.weightSliderLabel4]
+        self.componentWeightSliders = [self.componentWeightSlider1, self.componentWeightSlider2, self.componentWeightSlider3, self.componentWeightSlider4]
         self.x = None
         self.y = None
         self.trackIndex=0
         self.contrastFactor=1
         self.brightnessFactor=0
-        init_connectors(self)
-        self.setupImagesView()
         ###############################################################################
         self.ftComponentWidgets = [self.plot_ft1, self.plot_ft2,self.plot_ft3,self.plot_ft4]
-        self.viewport1 = ViewFt(self.imagesModels[0],self.plot_ft1)
-        self.viewport2 = ViewFt(self.imagesModels[1],self.plot_ft2)
-        self.viewport3 = ViewFt(self.imagesModels[2],self.plot_ft3)
-        self.viewport4 = ViewFt(self.imagesModels[3],self.plot_ft4) 
-        self.viewports = [self.viewport1, self.viewport2,self.viewport3,self.viewport4]
-        self.ftComponentImages = [self.viewport1.plotFtImg,self.viewport2.plotFtImg,self.viewport3.plotFtImg,self.viewport4.plotFtImg]
-        self.viewport1.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport1.ft_roi))
-        self.viewport2.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport2.ft_roi))
-        self.viewport3.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport3.ft_roi))
-        self.viewport4.sig_emitter.sig_ROI_changed.connect(lambda: self.modify_all_regions(self.viewport4.ft_roi))
-        self.componentWeightSlider1.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport1.ft_roi))
-        self.componentWeightSlider2.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport2.ft_roi))
-        self.componentWeightSlider3.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport3.ft_roi))
-        self.componentWeightSlider4.sliderPressed.connect(lambda: self.modify_all_regions(self.viewport4.ft_roi))
+        self.viewports = []
+        self.ftComponentImages = []
+        for i,imgModel in enumerate(self.imagesModels):
+            viewport=ViewFt(imgModel,self.ftComponentWidgets[i])
+            self.viewports.append(viewport)
+            self.ftComponentImages.append(viewport.plotFtImg)
         
+        for i, viewport in enumerate(self.viewports):
+            viewport.sig_emitter.sig_ROI_changed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.getRoi()))
+            self.componentWeightSliders[i].sliderPressed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.getRoi()))
+        init_connectors(self)
+        self.setupImagesView()
 
 
     def modify_all_regions(self, roi: pg.ROI):
         new_state = roi.getState()
         for view in self.viewports:
-            if view.ft_roi is not roi:
-                view.ft_roi.setState(new_state, update = False) # Set the state of the other views without sending update signal
-                view.ft_roi.stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
-                view.region_update(view.ft_roi,finish = False)    
+            if view.getRoi() is not roi:
+                view.getRoi().setState(new_state, update = False) # Set the state of the other views without sending update signal
+                view.getRoi().stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
+                view.region_update(view.getRoi(),finish = False)    
         
 
 
@@ -106,11 +102,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.myStorage.setImageModels(self.imagesModels)
             self.myStorage.unifyImagesSize()
             self.viewports[imgID].setImageModel(self.imagesModels[imgID])
-            self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
+            self.displayImage(self.imagesModels[imgID].getImgByte(), self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
                       print("ana "+str(i+1),img.imgShape)
-                      self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
+                      self.displayImage(self.imagesModels[i].getImgByte(), self.inputImages[i])
                       self.inputImages[i].export("mama"+str(i)+".jpg")
 
     def setupImagesView(self):
@@ -135,8 +131,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
-        FtComponentsData = [0*self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].phasePlot,\
-                            self.imagesModels[idx-1].realPlot,self.imagesModels[idx-1].imaginaryPlot]
+        FtComponentsData = [0*self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getPhasePlot(),\
+                            self.imagesModels[idx-1].getRealPlot(),self.imagesModels[idx-1].getImaginaryPlot()]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
 
     def enableOutputRatioSlider(self,index):
@@ -221,7 +217,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 if self.contrastFactor>1.5:
                     self.contrastFactor=1.5
             self.y = crrY
-            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
+            ImageModel.alterContrastAndBrightness(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
 
     def mouseReleaseEvent(self, event: QMouseEvent):
         if event.button() == Qt.MouseButton.LeftButton:
@@ -233,30 +229,25 @@ class MainWindow(QtWidgets.QMainWindow):
     
 
 def init_connectors(self):
-    self.originalImage1.mouseDoubleClickEvent = lambda event, idx=0: self.on_mouse_click(idx)
-    self.originalImage2.mouseDoubleClickEvent = lambda event, idx=1: self.on_mouse_click(idx)
-    self.originalImage3.mouseDoubleClickEvent = lambda event, idx=2: self.on_mouse_click(idx)
-    self.originalImage4.mouseDoubleClickEvent = lambda event, idx=3: self.on_mouse_click(idx)
+
+    for idx, image in enumerate(self.inputImages):
+        image.mouseDoubleClickEvent = lambda event, i=idx: self.on_mouse_click(i)
+
+    for idx, (outputMenu, weightSlider) in enumerate(zip(self.outputComboBoxes, self.componentWeightSliders)):
+            outputMenu.activated.connect(self.handleOutputCombos)
+            weightSlider.sliderReleased.connect(self.handleOutputCombos)
+            weightSlider.sliderReleased.connect(lambda s=weightSlider, i=idx: self.handleOutputRatioSliderChange(s, i))
+
+
     self.ftComponentMenu1.activated.connect(lambda: self.applyFtComponents(1))
     self.ftComponentMenu2.activated.connect(lambda: self.applyFtComponents(2))
     self.ftComponentMenu3.activated.connect(lambda: self.applyFtComponents(3))
     self.ftComponentMenu4.activated.connect(lambda: self.applyFtComponents(4))
-    self.outputComponentMenu1.activated.connect(self.handleOutputCombos)
-    self.outputComponentMenu2.activated.connect(self.handleOutputCombos)
-    self.outputComponentMenu3.activated.connect(self.handleOutputCombos)
-    self.outputComponentMenu4.activated.connect(self.handleOutputCombos)
-    self.componentWeightSlider1.sliderReleased.connect(self.handleOutputCombos)
-    self.componentWeightSlider2.sliderReleased.connect(self.handleOutputCombos)
-    self.componentWeightSlider3.sliderReleased.connect(self.handleOutputCombos)
-    self.componentWeightSlider4.sliderReleased.connect(self.handleOutputCombos)
     self.outputComponentMenu1.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(0))
     self.outputComponentMenu2.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(1))
     self.outputComponentMenu3.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(2))
     self.outputComponentMenu4.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(3))
-    self.componentWeightSlider1.sliderReleased.connect(lambda:self.handleOutputRatioSliderChange(self.componentWeightSlider1,0))
-    self.componentWeightSlider2.sliderReleased.connect(lambda:self.handleOutputRatioSliderChange(self.componentWeightSlider2,1))
-    self.componentWeightSlider3.sliderReleased.connect(lambda:self.handleOutputRatioSliderChange(self.componentWeightSlider3,2))
-    self.componentWeightSlider4.sliderReleased.connect(lambda:self.handleOutputRatioSliderChange(self.componentWeightSlider4,3))
+
 
 
 
