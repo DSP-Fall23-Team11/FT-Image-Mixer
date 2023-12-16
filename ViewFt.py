@@ -29,7 +29,8 @@ class ViewFt():
           self.ROI_Maxbounds.adjust(0, 0, self.plotFtImg.width(), self.plotFtImg.height())
       def setImageModel(self, imageModel):
           self.imageModel=imageModel
-
+      def getRoi(self):
+          return self.ft_roi
       def setupFtComponentsView(self,widget ):
         ft_view = widget.addViewBox()
         ft_view.setAspectLocked(True)

@@ -65,8 +65,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ftComponentImages.append(viewport.plotFtImg)
         
         for i, viewport in enumerate(self.viewports):
-            viewport.sig_emitter.sig_ROI_changed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.ft_roi))
-            self.componentWeightSliders[i].sliderPressed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.ft_roi))
+            viewport.sig_emitter.sig_ROI_changed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.getRoi()))
+            self.componentWeightSliders[i].sliderPressed.connect(lambda i=i, v=viewport: self.modify_all_regions(v.getRoi()))
         init_connectors(self)
         self.setupImagesView()
 
@@ -74,10 +74,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def modify_all_regions(self, roi: pg.ROI):
         new_state = roi.getState()
         for view in self.viewports:
-            if view.ft_roi is not roi:
-                view.ft_roi.setState(new_state, update = False) # Set the state of the other views without sending update signal
-                view.ft_roi.stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
-                view.region_update(view.ft_roi,finish = False)    
+            if view.getRoi() is not roi:
+                view.getRoi().setState(new_state, update = False) # Set the state of the other views without sending update signal
+                view.getRoi().stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
+                view.region_update(view.getRoi(),finish = False)    
         
 
 
