@@ -217,7 +217,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 if self.contrastFactor>1.5:
                     self.contrastFactor=1.5
             self.y = crrY
-            ImageModel.editedImage(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
+            ImageModel.alterContrastAndBrightness(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
 
     def mouseReleaseEvent(self, event: QMouseEvent):
         if event.button() == Qt.MouseButton.LeftButton:

@@ -21,6 +21,26 @@ class ImageModel():
         self.realPlot = 20 * np.log(np.real(self.fShift))
         self.imaginaryPlot = np.imag(self.fShift)
 
+    def SetImageParams(self,imgByte,edited=False):
+      if edited:
+         self.editedimgByte = imgByte
+         self.imgShape = self.editedimgByte.shape
+         self.dft = np.fft.fft2(self.editedimgByte)
+      else:
+         self.imgByte = imgByte
+         self.imgShape = self.imgByte.shape
+         self.dft = np.fft.fft2(self.imgByte)
+      self.real = np.real(self.dft)
+      self.imaginary = np.imag(self.dft)
+      self.magnitude = np.abs(self.dft)
+      self.phase = np.angle(self.dft)
+      self.fShift = np.fft.fftshift(self.dft)
+      self.magnitudePlot = 20 * np.log(np.abs(self.fShift))
+      self.phasePlot = np.angle(self.fShift)
+      self.realPlot = 20 * np.log(np.real(self.fShift))
+      self.imaginaryPlot = np.imag(self.fShift)  
+
+## Getters & Setters For Encaps
     def getImgPath(self):
        return self.imgPath
     def setImgPath(self,imgPath):
@@ -100,44 +120,17 @@ class ImageModel():
        return self.imaginaryPlot
     def setImaginaryPlot(self,imaginaryPlot):
        self.imaginaryPlot = imaginaryPlot
-    
-
-    def SetImageParams(self,imgByte):
-      self.imgByte = imgByte
-      self.imgShape = self.imgByte.shape
-      self.dft = np.fft.fft2(self.imgByte)
-      self.real = np.real(self.dft)
-      self.imaginary = np.imag(self.dft)
-      self.magnitude = np.abs(self.dft)
-      self.phase = np.angle(self.dft)
-      self.fShift = np.fft.fftshift(self.dft)
-      self.magnitudePlot = 20 * np.log(np.abs(self.fShift))
-      self.phasePlot = np.angle(self.fShift)
-      self.realPlot = 20 * np.log(np.real(self.fShift))
-      self.imaginaryPlot = np.imag(self.fShift)    
-    
-    def updateImgDims(self,imgByte):
-      self.editedimgByte = imgByte
-      self.editedimgShape = self.editedimgByte.shape
-      self.editeddft = np.fft.fft2(self.editedimgByte)
-      self.editedreal = np.real(self.editeddft)
-      self.editedimaginary = np.imag(self.editeddft)
-      self.editedmagnitude = np.abs(self.editeddft)
-      self.editedphase = np.angle(self.editeddft)
-      self.editedfShift = np.fft.fftshift(self.editeddft)
-      self.editedmagnitudePlot = 20 * np.log(np.abs(self.editedfShift))
-      self.editedphasePlot = np.angle(self.editedfShift)
-      self.editedrealPlot = 20 * np.log(np.real(self.editedfShift))
-      self.editedimaginaryPlot = np.imag(self.editedfShift)
 
     def getEditedImgShape(self):
        return self.editedimgShape
     def setEditedImgShape(self,editedimgShape):
-       self.editedimgShape = editedimgShape   
+       self.editedimgShape = editedimgShape  
+
     def getEditedImgShape(self):
        return self.editedimgShape
     def setEditedImgShape(self,editedimgShape):
        self.editedimgShape = editedimgShape
+
     def getEditedDft(self):
        return self.editeddft
     def setEditedDft(self,editeddft):
@@ -157,14 +150,17 @@ class ImageModel():
        return self.editedmagnitude
     def setEditedMagnitude(self,editedmagnitude):
        self.editedmagnitude = editedmagnitude  
+
     def getEditedPhase(self):
        return self.editedphase
     def setEditedPhase(self,editedphase):
        self.editedphase = editedphase      
+
     def getEditedFshift(self):
        return self.editedfShift
     def setEditedFshift(self,editedfShift):
-       self.editedfShift = editedfShift      
+       self.editedfShift = editedfShift  
+
     def getEditedMagnitudePlot(self):
        return self.editedmagnitudePlot
     def setEditedMagnitudePlot(self,editedmagnitudePlot):
@@ -186,7 +182,7 @@ class ImageModel():
        self.editedimaginaryPlot = editedimaginaryPlot        
 
 
-    def editedImage(self, imageObject, widget,Bfactor,Cfactor,idx):
+    def alterContrastAndBrightness(self, imageObject, widget,Bfactor,Cfactor,idx):
         contrastFactor = Cfactor
         brightnessFactor = Bfactor  # -1 to 1
         m = np.array(imageObject.imgByte) 
@@ -195,22 +191,22 @@ class ImageModel():
         im = (im/ 255 - 0.5) * 255 * contrastFactor + 128
         im = np.clip(im, 0, 255).astype(np.uint8)
         imageObject.editedimgByte = im
-        imageObject.editedUpdateImgDims(imageObject.editedimgByte)
+        imageObject.SetImageParams(imageObject.editedimgByte,True)
         widget.setImage(imageObject.editedimgByte)
         index = idx
         widget.ui.roiPlot.hide()
         self.applyFtComponents(index+1)
 
-    def editedUpdateImgDims(self,imgByte):
-        self.editedimgByte = imgByte
-        self.imgShape = self.editedimgByte.shape
-        self.dft = np.fft.fft2(self.editedimgByte)
-        self.real = np.real(self.dft)
-        self.imaginary = np.imag(self.dft)
-        self.magnitude = np.abs(self.dft)
-        self.phase = np.angle(self.dft)
-        self.fShift = np.fft.fftshift(self.dft)
-        self.magnitudePlot = 20 * np.log(np.abs(self.fShift))
-        self.phasePlot = np.angle(self.fShift)
-        self.realPlot = 20 * np.log(np.real(self.fShift))
-        self.imaginaryPlot = np.imag(self.fShift)
+    def setRectangleParams(self,imgByte):
+      self.editedimgByte = imgByte
+      self.editedimgShape = self.editedimgByte.shape
+      self.editeddft = np.fft.fft2(self.editedimgByte)
+      self.editedreal = np.real(self.editeddft)
+      self.editedimaginary = np.imag(self.editeddft)
+      self.editedmagnitude = np.abs(self.editeddft)
+      self.editedphase = np.angle(self.editeddft)
+      self.editedfShift = np.fft.fftshift(self.editeddft)
+      self.editedmagnitudePlot = 20 * np.log(np.abs(self.editedfShift))
+      self.editedphasePlot = np.angle(self.editedfShift)
+      self.editedrealPlot = 20 * np.log(np.real(self.editedfShift))
+      self.editedimaginaryPlot = np.imag(self.editedfShift)
