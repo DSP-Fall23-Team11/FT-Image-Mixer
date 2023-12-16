@@ -50,7 +50,7 @@ class ViewFt():
         if finish:
             self.sig_emitter.sig_ROI_changed.emit()
             print("fel port",self.imageModel)
-        new_img = ft_roi.getArrayRegion(self.imageModel.fShift,self.plotFtImg)
+        new_img = ft_roi.getArrayRegion(self.imageModel.getFshift(),self.plotFtImg)
         self.imageModel.updateImgDims(np.fft.ifft2(np.fft.ifftshift(new_img)))
         exportedImg = np.fft.ifft2(np.fft.ifftshift(new_img))
         image_to_save = Image.fromarray(np.abs(exportedImg).astype(np.uint8))

@@ -102,11 +102,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.myStorage.setImageModels(self.imagesModels)
             self.myStorage.unifyImagesSize()
             self.viewports[imgID].setImageModel(self.imagesModels[imgID])
-            self.displayImage(self.imagesModels[imgID].imgByte, self.inputImages[imgID])
+            self.displayImage(self.imagesModels[imgID].getImgByte(), self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
                       print("ana "+str(i+1),img.imgShape)
-                      self.displayImage(self.imagesModels[i].imgByte, self.inputImages[i])
+                      self.displayImage(self.imagesModels[i].getImgByte(), self.inputImages[i])
                       self.inputImages[i].export("mama"+str(i)+".jpg")
 
     def setupImagesView(self):
@@ -131,8 +131,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def applyFtComponents(self,idx):
         selectedComponent = self.allComboBoxes[idx-1].currentIndex()
-        FtComponentsData = [0*self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].magnitudePlot,self.imagesModels[idx-1].phasePlot,\
-                            self.imagesModels[idx-1].realPlot,self.imagesModels[idx-1].imaginaryPlot]
+        FtComponentsData = [0*self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getPhasePlot(),\
+                            self.imagesModels[idx-1].getRealPlot(),self.imagesModels[idx-1].getImaginaryPlot()]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
 
     def enableOutputRatioSlider(self,index):
