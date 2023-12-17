@@ -1,0 +1,426 @@
+864 - DEBUG - uiname is MainWindow
+824 - DEBUG - toplevel widget is MainWindow
+400 - DEBUG - setting property geometry
+400 - DEBUG - setting property windowTitle
+108 - DEBUG - push MainWindow MainWindow
+108 - DEBUG - push QWidget centralwidget
+400 - DEBUG - setting property pyuicMargins
+108 - DEBUG - push QGridLayout gridLayout_5
+108 - DEBUG - push QGridLayout gridLayout_4
+108 - DEBUG - push QVBoxLayout verticalLayout_2
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_22
+122 - DEBUG - pop widget QLabel label_22
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push ImageView outputImage1
+122 - DEBUG - pop widget ImageView outputImage1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QVBoxLayout verticalLayout_2
+108 - DEBUG - push QGridLayout gridLayout
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_18
+122 - DEBUG - pop widget QLabel label_18
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property font
+108 - DEBUG - push QComboBox ftComponentMenu2
+122 - DEBUG - pop widget QComboBox ftComponentMenu2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_3
+122 - DEBUG - pop widget QLabel label_3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_4
+122 - DEBUG - pop widget QLabel label_4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label
+122 - DEBUG - pop widget QLabel label
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_2
+122 - DEBUG - pop widget QLabel label_2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QHBoxLayout horizontalLayout_8
+116 - DEBUG - pop layout QHBoxLayout horizontalLayout_8
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property font
+400 - DEBUG - setting property currentText
+400 - DEBUG - setting property currentIndex
+108 - DEBUG - push QComboBox ftComponentMenu1
+122 - DEBUG - pop widget QComboBox ftComponentMenu1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QHBoxLayout horizontalLayout_7
+116 - DEBUG - pop layout QHBoxLayout horizontalLayout_7
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_17
+122 - DEBUG - pop widget QLabel label_17
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push ImageView originalImage2
+122 - DEBUG - pop widget ImageView originalImage2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push GraphicsLayoutWidget plot_ft2
+122 - DEBUG - pop widget GraphicsLayoutWidget plot_ft2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push GraphicsLayoutWidget plot_ft1
+122 - DEBUG - pop widget GraphicsLayoutWidget plot_ft1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push ImageView originalImage1
+122 - DEBUG - pop widget ImageView originalImage1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout
+116 - DEBUG - pop layout QGridLayout gridLayout_4
+108 - DEBUG - push QGridLayout gridLayout_3
+108 - DEBUG - push QGridLayout gridLayout_2
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_15
+122 - DEBUG - pop widget QLabel label_15
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QHBoxLayout horizontalLayout_10
+116 - DEBUG - pop layout QHBoxLayout horizontalLayout_10
+108 - DEBUG - push QHBoxLayout horizontalLayout_9
+116 - DEBUG - pop layout QHBoxLayout horizontalLayout_9
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_16
+122 - DEBUG - pop widget QLabel label_16
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property font
+108 - DEBUG - push QComboBox ftComponentMenu3
+122 - DEBUG - pop widget QComboBox ftComponentMenu3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_14
+122 - DEBUG - pop widget QLabel label_14
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_5
+122 - DEBUG - pop widget QLabel label_5
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push GraphicsLayoutWidget plot_ft3
+122 - DEBUG - pop widget GraphicsLayoutWidget plot_ft3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push ImageView originalImage4
+122 - DEBUG - pop widget ImageView originalImage4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push ImageView originalImage3
+122 - DEBUG - pop widget ImageView originalImage3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property font
+108 - DEBUG - push QComboBox ftComponentMenu4
+122 - DEBUG - pop widget QComboBox ftComponentMenu4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_20
+122 - DEBUG - pop widget QLabel label_20
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_19
+122 - DEBUG - pop widget QLabel label_19
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push GraphicsLayoutWidget plot_ft4
+122 - DEBUG - pop widget GraphicsLayoutWidget plot_ft4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_2
+108 - DEBUG - push QVBoxLayout verticalLayout_3
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_23
+122 - DEBUG - pop widget QLabel label_23
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+108 - DEBUG - push ImageView outputImage2
+122 - DEBUG - pop widget ImageView outputImage2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QVBoxLayout verticalLayout_3
+116 - DEBUG - pop layout QGridLayout gridLayout_3
+108 - DEBUG - push QGridLayout gridLayout_6
+108 - DEBUG - push QVBoxLayout verticalLayout
+108 - DEBUG - push QGridLayout gridLayout_22
+108 - DEBUG - push QGridLayout gridLayout_32
+108 - DEBUG - push QGridLayout gridLayout_33
+108 - DEBUG - push QGridLayout gridLayout_34
+116 - DEBUG - pop layout QGridLayout gridLayout_34
+108 - DEBUG - push QGridLayout gridLayout_35
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_comp1
+122 - DEBUG - pop widget QLabel label_comp1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QGridLayout gridLayout_36
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property maximum
+400 - DEBUG - setting property singleStep
+400 - DEBUG - setting property orientation
+400 - DEBUG - setting property tickPosition
+108 - DEBUG - push QSlider componentWeightSlider1
+122 - DEBUG - pop widget QSlider componentWeightSlider1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QGridLayout gridLayout_37
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_6
+122 - DEBUG - pop widget QLabel label_6
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_7
+122 - DEBUG - pop widget QLabel label_7
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_37
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property font
+400 - DEBUG - setting property acceptDrops
+400 - DEBUG - setting property iconSize
+108 - DEBUG - push QComboBox outputComponentMenu1
+122 - DEBUG - pop widget QComboBox outputComponentMenu1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel weightSliderLabel1
+122 - DEBUG - pop widget QLabel weightSliderLabel1
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_36
+116 - DEBUG - pop layout QGridLayout gridLayout_35
+116 - DEBUG - pop layout QGridLayout gridLayout_33
+116 - DEBUG - pop layout QGridLayout gridLayout_32
+108 - DEBUG - push QHBoxLayout horizontalLayout
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_21
+122 - DEBUG - pop widget QLabel label_21
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property font
+108 - DEBUG - push QComboBox outputChannelMenu
+122 - DEBUG - pop widget QComboBox outputChannelMenu
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QHBoxLayout horizontalLayout
+108 - DEBUG - push QGridLayout gridLayout_23
+116 - DEBUG - pop layout QGridLayout gridLayout_23
+116 - DEBUG - pop layout QGridLayout gridLayout_22
+108 - DEBUG - push QGridLayout gridLayout_24
+108 - DEBUG - push QGridLayout gridLayout_38
+108 - DEBUG - push QGridLayout gridLayout_39
+108 - DEBUG - push QGridLayout gridLayout_40
+116 - DEBUG - pop layout QGridLayout gridLayout_40
+108 - DEBUG - push QGridLayout gridLayout_41
+108 - DEBUG - push QGridLayout gridLayout_42
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property maximum
+400 - DEBUG - setting property singleStep
+400 - DEBUG - setting property orientation
+400 - DEBUG - setting property tickPosition
+108 - DEBUG - push QSlider componentWeightSlider2
+122 - DEBUG - pop widget QSlider componentWeightSlider2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QGridLayout gridLayout_43
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_8
+122 - DEBUG - pop widget QLabel label_8
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_9
+122 - DEBUG - pop widget QLabel label_9
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_43
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property font
+400 - DEBUG - setting property acceptDrops
+400 - DEBUG - setting property iconSize
+108 - DEBUG - push QComboBox outputComponentMenu2
+122 - DEBUG - pop widget QComboBox outputComponentMenu2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel weightSliderLabel2
+122 - DEBUG - pop widget QLabel weightSliderLabel2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_42
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_comp1_2
+122 - DEBUG - pop widget QLabel label_comp1_2
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_41
+116 - DEBUG - pop layout QGridLayout gridLayout_39
+116 - DEBUG - pop layout QGridLayout gridLayout_38
+108 - DEBUG - push QGridLayout gridLayout_25
+116 - DEBUG - pop layout QGridLayout gridLayout_25
+116 - DEBUG - pop layout QGridLayout gridLayout_24
+108 - DEBUG - push QGridLayout gridLayout_26
+108 - DEBUG - push QGridLayout gridLayout_27
+116 - DEBUG - pop layout QGridLayout gridLayout_27
+108 - DEBUG - push QGridLayout gridLayout_44
+108 - DEBUG - push QGridLayout gridLayout_45
+108 - DEBUG - push QGridLayout gridLayout_46
+116 - DEBUG - pop layout QGridLayout gridLayout_46
+108 - DEBUG - push QGridLayout gridLayout_47
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_comp1_3
+122 - DEBUG - pop widget QLabel label_comp1_3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+108 - DEBUG - push QGridLayout gridLayout_48
+108 - DEBUG - push QGridLayout gridLayout_49
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_10
+122 - DEBUG - pop widget QLabel label_10
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_11
+122 - DEBUG - pop widget QLabel label_11
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_49
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property maximum
+400 - DEBUG - setting property singleStep
+400 - DEBUG - setting property orientation
+400 - DEBUG - setting property tickPosition
+108 - DEBUG - push QSlider componentWeightSlider3
+122 - DEBUG - pop widget QSlider componentWeightSlider3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property font
+400 - DEBUG - setting property acceptDrops
+400 - DEBUG - setting property iconSize
+108 - DEBUG - push QComboBox outputComponentMenu3
+122 - DEBUG - pop widget QComboBox outputComponentMenu3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel weightSliderLabel3
+122 - DEBUG - pop widget QLabel weightSliderLabel3
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_48
+116 - DEBUG - pop layout QGridLayout gridLayout_47
+116 - DEBUG - pop layout QGridLayout gridLayout_45
+116 - DEBUG - pop layout QGridLayout gridLayout_44
+116 - DEBUG - pop layout QGridLayout gridLayout_26
+108 - DEBUG - push QGridLayout gridLayout_28
+108 - DEBUG - push QGridLayout gridLayout_50
+108 - DEBUG - push QGridLayout gridLayout_51
+108 - DEBUG - push QGridLayout gridLayout_52
+116 - DEBUG - pop layout QGridLayout gridLayout_52
+108 - DEBUG - push QGridLayout gridLayout_53
+108 - DEBUG - push QGridLayout gridLayout_54
+108 - DEBUG - push QGridLayout gridLayout_55
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_12
+122 - DEBUG - pop widget QLabel label_12
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_13
+122 - DEBUG - pop widget QLabel label_13
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_55
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property font
+400 - DEBUG - setting property acceptDrops
+400 - DEBUG - setting property iconSize
+108 - DEBUG - push QComboBox outputComponentMenu4
+122 - DEBUG - pop widget QComboBox outputComponentMenu4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property enabled
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property maximumSize
+400 - DEBUG - setting property maximum
+400 - DEBUG - setting property singleStep
+400 - DEBUG - setting property orientation
+400 - DEBUG - setting property tickPosition
+108 - DEBUG - push QSlider componentWeightSlider4
+122 - DEBUG - pop widget QSlider componentWeightSlider4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel weightSliderLabel4
+122 - DEBUG - pop widget QLabel weightSliderLabel4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_54
+400 - DEBUG - setting property sizePolicy
+400 - DEBUG - setting property minimumSize
+400 - DEBUG - setting property font
+400 - DEBUG - setting property text
+108 - DEBUG - push QLabel label_comp1_4
+122 - DEBUG - pop widget QLabel label_comp1_4
+130 - DEBUG - new topwidget <PyQt5.QtWidgets.QWidget object at 0x000001981EFB5A20>
+116 - DEBUG - pop layout QGridLayout gridLayout_53
+116 - DEBUG - pop layout QGridLayout gridLayout_51
+116 - DEBUG - pop layout QGridLayout gridLayout_50
+108 - DEBUG - push QGridLayout gridLayout_29
+116 - DEBUG - pop layout QGridLayout gridLayout_29
+116 - DEBUG - pop layout QGridLayout gridLayout_28
+116 - DEBUG - pop layout QVBoxLayout verticalLayout
+116 - DEBUG - pop layout QGridLayout gridLayout_6
+116 - DEBUG - pop layout QGridLayout gridLayout_5
+122 - DEBUG - pop widget QWidget centralwidget
+130 - DEBUG - new topwidget <__main__.MainWindow object at 0x000001981EFB5990>
+400 - DEBUG - setting property geometry
+108 - DEBUG - push QMenuBar menubar
+122 - DEBUG - pop widget QMenuBar menubar
+130 - DEBUG - new topwidget <__main__.MainWindow object at 0x000001981EFB5990>
+108 - DEBUG - push QStatusBar statusbar
+122 - DEBUG - pop widget QStatusBar statusbar
+130 - DEBUG - new topwidget <__main__.MainWindow object at 0x000001981EFB5990>
+122 - DEBUG - pop widget MainWindow MainWindow
+130 - DEBUG - new topwidget None

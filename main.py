@@ -147,6 +147,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.outputComboBoxes[index].setEnabled(True)    
 
     def handleOutputCombosChange(self,outputMode):
+        print(outputMode)
         if outputMode == Modes.magnitudeAndPhase:
             for i in range(1,4):
                 self.outputComboBoxes[i].clear()

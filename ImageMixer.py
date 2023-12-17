@@ -41,6 +41,7 @@ class ImageMixer():
             magnitudeWeights, phaseWeights = self.generateModesWeights(selectedOutputComponents)
             for i, (mag_weight, phase_weight) in enumerate(zip(magnitudeWeights, phaseWeights)):
                 if mag_weight != 0:
+                    print(imagesModels[i].getEditedMagnitude(),"a7aaaaaa")
                     magnitudeMix += mag_weight * imagesModels[i].getEditedMagnitude()
                 if phase_weight != 0:
                     phaseMix += phase_weight * imagesModels[i].getEditedPhase()
