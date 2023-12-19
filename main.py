@@ -55,6 +55,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.trackIndex=0
         self.contrastFactor=1
         self.brightnessFactor=0
+        self.Mode = 0    
         ###############################################################################
         self.ftComponentWidgets = [self.plot_ft1, self.plot_ft2,self.plot_ft3,self.plot_ft4]
         self.viewports = []
@@ -77,7 +78,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if view.getRoi() is not roi:
                 view.getRoi().setState(new_state, update = False) # Set the state of the other views without sending update signal
                 view.getRoi().stateChanged(finish = False) # Update the views after changing without sending stateChangeFinished signal
-                view.region_update(view.getRoi(),finish = False)    
+                view.region_update(view.getRoi(),finish = False)           
         
 
 
@@ -105,7 +106,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.displayImage(self.imagesModels[imgID].getImgByte(), self.inputImages[imgID])
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
-                      print("ana "+str(i+1),img.imgShape)
                       self.displayImage(self.imagesModels[i].getImgByte(), self.inputImages[i])
                       self.inputImages[i].export("mama"+str(i)+".jpg")
 
@@ -124,7 +124,6 @@ class MainWindow(QtWidgets.QMainWindow):
                      widget.ui.roiPlot.hide()
     
     def on_mouse_click(self,idx):
-           # print("Double-clicked!"+str(idx))
             self.loadFile(idx)
             self.enableOutputCombos(idx)
 
@@ -146,33 +145,36 @@ class MainWindow(QtWidgets.QMainWindow):
         self.allComboBoxes[index].setEnabled(True)
         self.outputComboBoxes[index].setEnabled(True)    
 
-    def handleOutputCombosChange(self,outputMode):
+    def handleOutputCombosChange(self):
+        if self.outputComponentMenu1.currentText()=="Magnitude" or self.outputComponentMenu1.currentText()=="Phase"  : outputMode = Modes.magnitudeAndPhase 
+        else: outputMode = Modes.realAndImaginary
         if outputMode == Modes.magnitudeAndPhase:
             for i in range(1,4):
-                self.outputComboBoxes[i].clear()
-                self.outputComboBoxes[i].addItem("Choose Component")
-                self.outputComboBoxes[i].addItem("Magnitude")
-                self.outputComboBoxes[i].addItem("Phase")
-                self.outputComboBoxes[i].setEnabled(True)    
+              self.outputComboBoxes[i].model().item(1).setEnabled(True)
+              self.outputComboBoxes[i].model().item(2).setEnabled(True)     
+              self.outputComboBoxes[i].setCurrentIndex(1)
+              self.outputComboBoxes[i].model().item(3).setEnabled(False)
+              self.outputComboBoxes[i].model().item(4).setEnabled(False)
         else: 
             for i in range(1,4):
-                self.outputComboBoxes[i].clear()
-                self.outputComboBoxes[i].addItem("Choose Component")
-                self.outputComboBoxes[i].addItem("Real")
-                self.outputComboBoxes[i].addItem("Imaginary")    
-                self.outputComboBoxes[i].setEnabled(True)
+              self.outputComboBoxes[i].model().item(3).setEnabled(True)
+              self.outputComboBoxes[i].model().item(4).setEnabled(True)    
+              self.outputComboBoxes[i].setCurrentIndex(3)
+              self.outputComboBoxes[i].model().item(1).setEnabled(False)
+              self.outputComboBoxes[i].model().item(2).setEnabled(False)
     def handleOutputCombos(self):
-       print("mama")
        output  = ...
        outputIdx = self.outputChannelMenu.currentIndex()
        selectedOutputComponents = [  i.currentText() for i in self.outputComboBoxes] 
        weights = [i.value() for  i in self.outputRatioSliders]
        self.myMixer.setWeights(weights)
        if selectedOutputComponents[0] == "Magnitude" or selectedOutputComponents[0] == "Phase":
-            output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase,selectedOutputComponents)
+            output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase,selectedOutputComponents,self.viewports,self.Mode)
        elif selectedOutputComponents[0] == "Real"  or selectedOutputComponents[0] == "Imaginary":
-            output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary,selectedOutputComponents)
+            output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary,selectedOutputComponents,self.viewports,self.Mode)
        self.displayImage(output,self.outputImages[outputIdx])     
+    def handleMixerModeCombo(self):
+          self.Mode = self.InnerOuterMenu.currentIndex() 
         # Mixer Logic IFFT    
     ###########################################################################
     # Brightness/Contrast Logic 
@@ -224,10 +226,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.mouse_pressed = False
                 
             
-
-             
-    
-
 def init_connectors(self):
 
     for idx, image in enumerate(self.inputImages):
@@ -247,6 +245,10 @@ def init_connectors(self):
     self.outputComponentMenu2.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(1))
     self.outputComponentMenu3.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(2))
     self.outputComponentMenu4.currentIndexChanged.connect(lambda:self.enableOutputRatioSlider(3))
+    self.InnerOuterMenu.currentIndexChanged.connect(lambda:self.handleMixerModeCombo())
+    self.InnerOuterMenu.currentIndexChanged.connect(lambda:self.handleOutputCombos())
+    self.outputComponentMenu1.activated.connect(lambda:self.handleOutputCombosChange())
+    
 
 
 

@@ -50,13 +50,8 @@ class ViewFt():
       def region_update(self,ft_roi , finish = False):
         if finish:
             self.sig_emitter.sig_ROI_changed.emit()
-            print("fel port",self.imageModel)
-        new_img = ft_roi.getArrayRegion(self.imageModel.getFshift(),self.plotFtImg)
-        self.imageModel.setRectangleParams(np.fft.ifft2(np.fft.ifftshift(new_img)))
-        exportedImg = np.fft.ifft2(np.fft.ifftshift(new_img))
-        image_to_save = Image.fromarray(np.abs(exportedImg).astype(np.uint8))
-        image_to_save.save('output_image.png')
-
+        bounds = ft_roi.sceneBoundingRect()
+        self.x1, self.y1, self.x2, self.y2 = bounds.x(), bounds.y(), bounds.x() + bounds.width(), bounds.y() + bounds.height()
       def add_scale_handles_ROI(self, roi : pg.ROI):
         positions = np.array([[0,0], [1,0], [1,1], [0,1]])
         for pos in positions:        

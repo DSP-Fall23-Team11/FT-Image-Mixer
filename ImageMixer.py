@@ -28,33 +28,37 @@ class ImageMixer():
             elif component == "Choose Component":
                    magWeight[i] = 0
                    phaseWeight[i] = 0 
-        print(magWeight)
-        print(phaseWeight)
         return magWeight,phaseWeight                 
 
 
     
-    def mixImageModels(self,imagesModels,mode,selectedOutputComponents):
+    def mixImageModels(self,imagesModels,mode,selectedOutputComponents,viewports,roiMode):
+        if roiMode == 0:
+                mask = np.zeros(imagesModels[0].imgByte.shape)
+                mask[int(viewports[0].y1):int(viewports[0].y2)+1,int(viewports[0].x1):int(viewports[0].x2)+1] = 1
+        else:    
+                mask = np.ones(imagesModels[0].imgByte.shape)
+                mask[int(viewports[0].y1):int(viewports[0].y2)+1,int(viewports[0].x1):int(viewports[0].x2)+1] = 0
         if mode == Modes.magnitudeAndPhase:
             magnitudeMix= 0
             phaseMix =0
             magnitudeWeights, phaseWeights = self.generateModesWeights(selectedOutputComponents)
             for i, (mag_weight, phase_weight) in enumerate(zip(magnitudeWeights, phaseWeights)):
                 if mag_weight != 0:
-                    magnitudeMix += mag_weight * imagesModels[i].getEditedMagnitude()
+                    magnitudeMix += mag_weight * np.abs(imagesModels[i].getFshift())
                 if phase_weight != 0:
-                    phaseMix += phase_weight * imagesModels[i].getEditedPhase()
-            return abs(np.fft.ifft2(np.multiply(magnitudeMix,np.exp(1j * phaseMix))))        
+                    phaseMix += phase_weight * np.angle(imagesModels[i].getFshift())
+            return np.clip(np.abs(np.fft.ifft2(((magnitudeMix*mask)*np.exp(1j * (phaseMix*mask))))),0,255)        
         elif mode == Modes.realAndImaginary:
             realMix = 0
             imaginaryMix = 0
             realWeights, imaginaryWeights = self.generateModesWeights(selectedOutputComponents)
             for i, (real_weight, imag_weight) in enumerate(zip(realWeights, imaginaryWeights)):
                 if real_weight != 0:
-                    realMix += real_weight * imagesModels[i].getEditedReal()
+                    realMix += real_weight * np.real(imagesModels[i].getFshift())
                 if imag_weight != 0:
-                    imaginaryMix += imag_weight * imagesModels[i].getEditedImaginary()       
-            return abs(np.fft.ifft2(realMix+ 1j*imaginaryMix)) 
+                    imaginaryMix += imag_weight * np.imag(imagesModels[i].getFshift())       
+            return np.clip(np.abs(np.fft.ifft2((realMix*mask)+(imaginaryMix*mask)*1j)),0,255) 
 
 
 
