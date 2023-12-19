@@ -68,6 +68,18 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>225</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>350</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>11</pointsize>
@@ -156,6 +168,18 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>225</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>350</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>11</pointsize>
@@ -212,15 +236,21 @@
         <item row="1" column="1">
          <widget class="ImageView" name="originalImage2">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>0</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
@@ -228,34 +258,65 @@
         <item row="9" column="1">
          <widget class="GraphicsLayoutWidget" name="plot_ft2" native="true">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>271</width>
-            <height>207</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
         </item>
         <item row="9" column="0">
-         <widget class="GraphicsLayoutWidget" name="plot_ft1" native="true"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="ImageView" name="originalImage1">
+         <widget class="GraphicsLayoutWidget" name="plot_ft1" native="true">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>0</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="ImageView" name="originalImage1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
@@ -302,6 +363,18 @@
          <widget class="QComboBox" name="ftComponentMenu3">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>225</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>350</width>
+            <height>16777215</height>
+           </size>
           </property>
           <property name="font">
            <font>
@@ -361,10 +434,22 @@
         </item>
         <item row="6" column="0">
          <widget class="GraphicsLayoutWidget" name="plot_ft3" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
-            <width>271</width>
-            <height>207</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
@@ -372,15 +457,21 @@
         <item row="1" column="1">
          <widget class="ImageView" name="originalImage4">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>0</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
@@ -388,15 +479,21 @@
         <item row="1" column="0">
          <widget class="ImageView" name="originalImage3">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>0</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
@@ -405,6 +502,18 @@
          <widget class="QComboBox" name="ftComponentMenu4">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>225</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>350</width>
+            <height>16777215</height>
+           </size>
           </property>
           <property name="font">
            <font>
@@ -464,10 +573,22 @@
         </item>
         <item row="6" column="1">
          <widget class="GraphicsLayoutWidget" name="plot_ft4" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>150</horstretch>
+            <verstretch>150</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
-            <width>271</width>
-            <height>0</height>
+            <width>100</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>350</height>
            </size>
           </property>
          </widget>
@@ -1533,7 +1654,7 @@
      <x>0</x>
      <y>0</y>
      <width>1445</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

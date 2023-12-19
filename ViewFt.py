@@ -20,7 +20,7 @@ class ViewFt():
       def __init__(self,imageModel, widget):  
           self.sig_emitter = SignalEmitter()
           self.imageModel = imageModel
-          self.ROI_Maxbounds = QRectF(0, 0, 600,600 )    
+          self.ROI_Maxbounds = QRectF(0, 0, 1000,1000 )    
           self.initial_roi_position = None
           self.plotFtImg = self.setupFtComponentsView(widget)
           # self.ftComponentWidgets = [self.plot_ft1, self.plot_ft2,self.plot_ft3,self.plot_ft4]
