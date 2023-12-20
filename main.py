@@ -179,6 +179,11 @@ class MainWindow(QtWidgets.QMainWindow):
     ###########################################################################
     # Brightness/Contrast Logic 
     def mousePressEvent(self, event: QMouseEvent):
+          for i in range(4):
+            if (event.button() == Qt.MouseButton.MidButton) and (self.inputImages[i].underMouse()):
+                self.contrastFactor=1
+                self.brightnessFactor=0
+                ImageModel.alterContrastAndBrightness(self,self.imagesModels[i],self.inputImages[i],self.brightnessFactor,self.contrastFactor,self.trackIndex)
 
           for i in range(4):
             if (
