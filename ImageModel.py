@@ -196,6 +196,7 @@ class ImageModel():
         index = idx
         widget.ui.roiPlot.hide()
         self.applyFtComponents(index+1)
+        
 
    #  def setRectangleParams(self,imgByte):
    #    self.editedimgByte = imgByte
