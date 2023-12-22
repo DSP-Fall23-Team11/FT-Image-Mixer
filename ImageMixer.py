@@ -1,7 +1,19 @@
+import logging
 import numpy as np
 import cv2
 from ImageModel import ImageModel
 from Modes import Modes
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(asctime)s - %(lineno)s - %(levelname)s - %(message)s')
+
+FileHandler = logging.FileHandler('imageMixer.log')
+FileHandler.setLevel(logging.DEBUG)
+FileHandler.setFormatter(formatter)
+logger.addHandler(FileHandler)
+
 # weights -> sliders , init : 0 
 # Mode -> mode enum
 # 
@@ -59,6 +71,6 @@ class ImageMixer():
                 if imag_weight != 0:
                     imaginaryMix += imag_weight * np.imag(imagesModels[i].getFshift())       
             return np.clip(np.abs(np.fft.ifft2((realMix*mask)+(imaginaryMix*mask)*1j)),0,255) 
-
+            
 
 

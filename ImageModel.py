@@ -196,18 +196,4 @@ class ImageModel():
         index = idx
         widget.ui.roiPlot.hide()
         self.applyFtComponents(index+1)
-
-   #  def setRectangleParams(self,imgByte):
-   #    self.editedimgByte = imgByte
-   #    self.editedimgShape = self.editedimgByte.shape
-   #    print("ana",self.editedimgShape)
-   #    self.editeddft = np.fft.fft2(self.editedimgByte)
-   #    self.editedreal = np.real(self.editeddft)
-   #    self.editedimaginary = np.imag(self.editeddft)
-   #    self.editedmagnitude = np.abs(self.editeddft)
-   #    self.editedphase = np.angle(self.editeddft)
-   #    self.editedfShift = np.fft.fftshift(self.editeddft)
-   #    self.editedmagnitudePlot = 20 * np.log(np.abs(self.editedfShift))
-   #    self.editedphasePlot = np.angle(self.editedfShift)
-   #    self.editedrealPlot = 20 * np.log(np.real(self.editedfShift))
-   #    self.editedimaginaryPlot = np.imag(self.editedfShift)
+        

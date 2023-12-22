@@ -17,14 +17,15 @@ from Modes import Modes
 from storage import Storage
 from ViewFt import ViewFt
 
-# Create and configure logger
-logging.basicConfig(level=logging.DEBUG,
-                    filename="app.log",
-                    format='%(lineno)s - %(levelname)s - %(message)s',
-                    filemode='w')
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
-# Creating an object
-logger = logging.getLogger()
+formatter = logging.Formatter('%(asctime)s - %(lineno)s - %(levelname)s - %(message)s')
+
+FileHandler = logging.FileHandler('imageMixer.log')
+FileHandler.setLevel(logging.DEBUG)
+FileHandler.setFormatter(formatter)
+logger.addHandler(FileHandler)
 
 class SignalEmitter(QObject):    
     sig_ROI_changed = pyqtSignal()
@@ -89,14 +90,15 @@ class MainWindow(QtWidgets.QMainWindow):
             qss = stream.readAll()
             self.setStyleSheet(qss)
         else:
-            print(f"Failed to open stylesheet file: {stylesheet_path}")    
+            logger.error(f"Failed to open stylesheet file: {stylesheet_path}")    
     
 
     def loadFile(self, imgID):
             self.filename, self.format = QtWidgets.QFileDialog.getOpenFileName(None, "Load Image",
                                                                             "*.jpg;;" "*.jpeg;;" "*.png;;")
-            imgName = self.filename.split('/')[-1] # for Logging
+            imgName = self.filename.split('/')[-1] 
             if self.filename == "":
+                logger.warning(f"No file selected for image ID {imgID}.")
                 return 
             image = cv2.imread(self.filename, flags=cv2.IMREAD_GRAYSCALE).T
             self.imagesModels[imgID] = ImageModel(self.filename)
@@ -108,6 +110,7 @@ class MainWindow(QtWidgets.QMainWindow):
                  if type(img)!=type(...):
                       self.displayImage(self.imagesModels[i].getImgByte(), self.inputImages[i])
                       self.inputImages[i].export("mama"+str(i)+".jpg")
+                      logger.debug(f"Loading image with ID {imgID}.")
 
     def setupImagesView(self):
         for widget in self.imageWidgets:
@@ -116,7 +119,9 @@ class MainWindow(QtWidgets.QMainWindow):
             widget.ui.menuBtn.hide()
             widget.ui.roiPlot.hide()
             widget.getView().setAspectLocked(False)
-            widget.view.setAspectLocked(False)      
+            widget.view.setAspectLocked(False)
+            logger.debug("image views set up")
+      
 
     def displayImage(self, data, widget):
                 widget.setImage(data)
@@ -133,6 +138,7 @@ class MainWindow(QtWidgets.QMainWindow):
         FtComponentsData = [0*self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getMagnitudePlot(),self.imagesModels[idx-1].getPhasePlot(),\
                             self.imagesModels[idx-1].getRealPlot(),self.imagesModels[idx-1].getImaginaryPlot()]
         self.displayImage(FtComponentsData[selectedComponent],self.ftComponentImages[idx-1])
+        logger.debug("Ft components applied")
 
     def enableOutputRatioSlider(self,index):
         selectedOutputComponents = [  i.currentText() for i in self.outputComboBoxes] 
@@ -144,24 +150,18 @@ class MainWindow(QtWidgets.QMainWindow):
     def enableOutputCombos(self,index):
         self.allComboBoxes[index].setEnabled(True)
         self.outputComboBoxes[index].setEnabled(True)    
-
+              
     def handleOutputCombosChange(self):
-        if self.outputComponentMenu1.currentText()=="Magnitude" or self.outputComponentMenu1.currentText()=="Phase"  : outputMode = Modes.magnitudeAndPhase 
-        else: outputMode = Modes.realAndImaginary
-        if outputMode == Modes.magnitudeAndPhase:
-            for i in range(1,4):
-              self.outputComboBoxes[i].model().item(1).setEnabled(True)
-              self.outputComboBoxes[i].model().item(2).setEnabled(True)     
-              self.outputComboBoxes[i].setCurrentIndex(1)
-              self.outputComboBoxes[i].model().item(3).setEnabled(False)
-              self.outputComboBoxes[i].model().item(4).setEnabled(False)
-        else: 
-            for i in range(1,4):
-              self.outputComboBoxes[i].model().item(3).setEnabled(True)
-              self.outputComboBoxes[i].model().item(4).setEnabled(True)    
-              self.outputComboBoxes[i].setCurrentIndex(3)
-              self.outputComboBoxes[i].model().item(1).setEnabled(False)
-              self.outputComboBoxes[i].model().item(2).setEnabled(False)
+        outputMode = Modes.magnitudeAndPhase if self.outputComponentMenu1.currentText() in ["Magnitude", "Phase"] else Modes.realAndImaginary
+        for i in range(1,4):
+              magnitudeAndPhaseState = outputMode == Modes.magnitudeAndPhase
+              realAndImaginaryState = not magnitudeAndPhaseState
+              self.outputComboBoxes[i].model().item(1).setEnabled(magnitudeAndPhaseState)
+              self.outputComboBoxes[i].model().item(2).setEnabled(magnitudeAndPhaseState)     
+              self.outputComboBoxes[i].model().item(3).setEnabled(realAndImaginaryState)
+              self.outputComboBoxes[i].model().item(4).setEnabled(realAndImaginaryState)
+              self.outputComboBoxes[i].setCurrentIndex(1 if magnitudeAndPhaseState else 3)
+
     def handleOutputCombos(self):
        output  = ...
        outputIdx = self.outputChannelMenu.currentIndex()
@@ -170,11 +170,19 @@ class MainWindow(QtWidgets.QMainWindow):
        self.myMixer.setWeights(weights)
        if selectedOutputComponents[0] == "Magnitude" or selectedOutputComponents[0] == "Phase":
             output = self.myMixer.mixImageModels(self.imagesModels, Modes.magnitudeAndPhase,selectedOutputComponents,self.viewports,self.Mode)
+            logger.debug(f"images mixed in magnitude and phase mode")        
+         
        elif selectedOutputComponents[0] == "Real"  or selectedOutputComponents[0] == "Imaginary":
             output = self.myMixer.mixImageModels(self.imagesModels, Modes.realAndImaginary,selectedOutputComponents,self.viewports,self.Mode)
+            logger.debug(f"images mixed in Real and imaginary mode")        
+         
        self.displayImage(output,self.outputImages[outputIdx])     
     def handleMixerModeCombo(self):
           self.Mode = self.InnerOuterMenu.currentIndex() 
+          if(self.Mode == 0):
+              logger.info(f"mixing is in Inner mode")
+          else:
+              logger.info(f"mixing is in Outer mode ")    
         # Mixer Logic IFFT    
     ###########################################################################
     # Brightness/Contrast Logic 
@@ -184,6 +192,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.contrastFactor=1
                 self.brightnessFactor=0
                 ImageModel.alterContrastAndBrightness(self,self.imagesModels[i],self.inputImages[i],self.brightnessFactor,self.contrastFactor,self.trackIndex)
+                logger.debug("contast/brightness changed")
 
           for i in range(4):
             if (
@@ -224,7 +233,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 if self.contrastFactor>1.5:
                     self.contrastFactor=1.5
             self.y = crrY
-            ImageModel.alterContrastAndBrightness(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)    
+            ImageModel.alterContrastAndBrightness(self,self.imagesModels[self.trackIndex],self.inputImages[self.trackIndex],self.brightnessFactor,self.contrastFactor,self.trackIndex)
+            logger.debug("contast/brightness changed")    
 
     def mouseReleaseEvent(self, event: QMouseEvent):
         if event.button() == Qt.MouseButton.LeftButton:
