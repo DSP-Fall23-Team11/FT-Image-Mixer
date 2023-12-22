@@ -13,14 +13,13 @@ FileHandler = logging.FileHandler('imageMixer.log')
 FileHandler.setLevel(logging.DEBUG)
 FileHandler.setFormatter(formatter)
 logger.addHandler(FileHandler)
-
 # weights -> sliders , init : 0 
 # Mode -> mode enum
 # 
 class ImageMixer():
     def __init__(self):
         self.weights = [0,0,0,0]
-        self.weights = [ weight/100 for  weight in self.weights]
+        # self.weights = [ weight/100 for  weight in self.weights]
         
 
     def setWeights(self, weights):
