@@ -150,24 +150,18 @@ class MainWindow(QtWidgets.QMainWindow):
     def enableOutputCombos(self,index):
         self.allComboBoxes[index].setEnabled(True)
         self.outputComboBoxes[index].setEnabled(True)    
-
+              
     def handleOutputCombosChange(self):
-        if self.outputComponentMenu1.currentText()=="Magnitude" or self.outputComponentMenu1.currentText()=="Phase"  : outputMode = Modes.magnitudeAndPhase 
-        else: outputMode = Modes.realAndImaginary
-        if outputMode == Modes.magnitudeAndPhase:
-            for i in range(1,4):
-              self.outputComboBoxes[i].model().item(1).setEnabled(True)
-              self.outputComboBoxes[i].model().item(2).setEnabled(True)     
-              self.outputComboBoxes[i].setCurrentIndex(1)
-              self.outputComboBoxes[i].model().item(3).setEnabled(False)
-              self.outputComboBoxes[i].model().item(4).setEnabled(False)
-        else: 
-            for i in range(1,4):
-              self.outputComboBoxes[i].model().item(3).setEnabled(True)
-              self.outputComboBoxes[i].model().item(4).setEnabled(True)    
-              self.outputComboBoxes[i].setCurrentIndex(3)
-              self.outputComboBoxes[i].model().item(1).setEnabled(False)
-              self.outputComboBoxes[i].model().item(2).setEnabled(False)
+        outputMode = Modes.magnitudeAndPhase if self.outputComponentMenu1.currentText() in ["Magnitude", "Phase"] else Modes.realAndImaginary
+        for i in range(1,4):
+              magnitudeAndPhaseState = outputMode == Modes.magnitudeAndPhase
+              realAndImaginaryState = not magnitudeAndPhaseState
+              self.outputComboBoxes[i].model().item(1).setEnabled(magnitudeAndPhaseState)
+              self.outputComboBoxes[i].model().item(2).setEnabled(magnitudeAndPhaseState)     
+              self.outputComboBoxes[i].model().item(3).setEnabled(realAndImaginaryState)
+              self.outputComboBoxes[i].model().item(4).setEnabled(realAndImaginaryState)
+              self.outputComboBoxes[i].setCurrentIndex(1 if magnitudeAndPhaseState else 3)
+
     def handleOutputCombos(self):
        output  = ...
        outputIdx = self.outputChannelMenu.currentIndex()
