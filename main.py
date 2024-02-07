@@ -109,7 +109,7 @@ class MainWindow(QtWidgets.QMainWindow):
             for i, img in enumerate(self.imagesModels):
                  if type(img)!=type(...):
                       self.displayImage(self.imagesModels[i].getImgByte(), self.inputImages[i])
-                      self.inputImages[i].export("mama"+str(i)+".jpg")
+                      self.inputImages[i].export("Output"+str(i)+".jpg")
                       logger.debug(f"Loading image with ID {imgID}.")
 
     def setupImagesView(self):
