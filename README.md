@@ -91,3 +91,5 @@ The program logs user interactions and critical steps, aiding in debugging and p
     </td>
       </tr>
  </table>
+
+Feel free to contribute, report issues, or suggest enhancements. Happy mixing!
