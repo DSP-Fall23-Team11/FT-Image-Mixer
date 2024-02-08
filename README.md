@@ -52,10 +52,12 @@ To use the Fourier Transform Mixer, follow these steps:
 pip install -r requirements.txt
 ```
 
-3. Load four grayscale images.
-4. Adjust Fourier Transform components, weights, and regions as desired.
-5. Monitor the mixing progress with the weighted sliders.
-6. View the resulting mixed image in the specified output viewport.
+3. Run main.py
+
+4. Load four grayscale images.
+5. Adjust Fourier Transform components, weights, and regions as desired.
+6. Monitor the mixing progress with the weighted sliders.
+7. View the resulting mixed image in the specified output viewport.
 
 ## Logging
 
