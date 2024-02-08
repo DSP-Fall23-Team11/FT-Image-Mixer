@@ -4,6 +4,10 @@
 
 This desktop program is designed to illustrate the significance of magnitude and phase components in a signal, particularly emphasizing the frequencies' contributions. The application operates on 2D signals, represented by grayscale images, while the underlying concept applies universally to any signal. The software includes various features aimed at providing a comprehensive understanding of Fourier Transform components.
 
+## Live Demo
+
+https://github.com/DSP-Fall23-Team11/DSP-task4/assets/83988379/1a62e202-9507-4c29-80ba-8b76c83005ac
+
 ## Features
 
 ### Images Viewers
@@ -41,11 +45,17 @@ This desktop program is designed to illustrate the significance of magnitude and
 
 To use the Fourier Transform Mixer, follow these steps:
 
-1. Open the program.
-2. Load four grayscale images.
-3. Adjust Fourier Transform components, weights, and regions as desired.
-4. Monitor the mixing progress with the progress bar.
-5. View the resulting mixed image in the specified output viewport.
+1. Clone the repository.
+2. Run the following command
+
+```
+pip install -r requirements.txt
+```
+
+3. Load four grayscale images.
+4. Adjust Fourier Transform components, weights, and regions as desired.
+5. Monitor the mixing progress with the weighted sliders.
+6. View the resulting mixed image in the specified output viewport.
 
 ## Logging
 
